@@ -1,96 +1,302 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script defer src="/_vercel/insights/script.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css"
-    />
-    <title>Vercel HTML Starter</title>
-    <meta
-      name="description"
-      content="High-performance HTML based website template."
-    />
-  </head>
-  <body>
-    <h1>Vercel HTML Starter</h1>
-    <p>
-      This template is a simple, but powerful single
-      <code>index.html</code> file deployed to
-      <a href="https://vercel.com">Vercel</a>. When your site is deployed, all
-      static assets (like HTML, JavaScript, CSS, images, and more) are deployed
-      globally to every
-      <a href="https://vercel.com/docs/concepts/edge-network/overview"
-        >Vercel Edge Network</a
-      >
-      region.
-    </p>
-    <h2>Simple, privacy-friendly analytics</h2>
-    <p>
-      Want to understand your visitor traffic? Vercel Analytics gives you
-      first-party, privacy-friendly traffic analytics for your HTML site. This
-      template is already configured using the following script:
-    </p>
-    <pre><code>&lt;script defer src="/_vercel/insights/script.js"&gt;&lt;/script&gt;</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/analytics">Vercel Analytics</a>.
-    </p>
-    <h2>Integrated with git</h2>
-    <p>
-      Deploying updates to your site is as simple as
-      <code>git push</code> thanks to Vercel's advanced
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-      Support for GitHub, GitLab, Bitbucket is zero-configuration, and with the
-      flexible Vercel CLI and API, you can integrate with any tool possible.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-    </p>
-    <h2>Fast <code>gzip</code> compression</h2>
-    <p>
-      To help ensure the smallest possible file sizes for your static assets,
-      the Vercel Edge Network compresses files by default using
-      <code>gzip</code>. You can also optionally use
-      <code>brotli</code> compressesion if you prefer.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/edge-network/compression"
-        >compression</a
-      >.
-    </p>
-    <h2>Advanced routing configuration</h2>
-    <p>
-      Vercel gives you a variety of ways to configure the routing of your
-      website. For example, adding redirects, rewrites, or headers to your page.
-      While you can use <code>vercel.json</code> to define these through JSON,
-      you can also express your routing configuration as code using
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-    <p>
-      Middleware runs before the
-      <a href="https://vercel.com/docs/concepts/edge-network/caching"
-        >Vercel Edge Network Cache</a
-      >, so you can configure routing exactly as your application needs. For
-      example, this template uses <code>middleware.js</code> defined in the root
-      of the repository to add additional security headers to the site:
-    </p>
-    <pre><code>referrer-policy: origin-when-cross-origin
-strict-transport-security: max-age=31536000; includeSubDomains; preload
-x-content-type-options: nosniff
-x-dns-prefetch-control: on
-x-frame-options: DENY</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-  </body>
+<html lang="en" class="dark h-full bg-[#020617] text-slate-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunul (LUN) Null Net - Comprehensive Technical Whitepaper</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            50: '#f0fdfa',
+                            500: '#14b8a6',
+                            900: '#134e4a',
+                            glow: '#00f2fe'
+                        }
+                    },
+                    fontFamily: {
+                        mono: ['JetBrains Mono', 'Fira Code', 'Monaco', 'monospace'],
+                        sans: ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- KaTeX for Mathematics (LaTeX equations) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #020617;
+            color: #f8fafc;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #020617;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .markdown-body h1, .markdown-body h2, .markdown-body h3 {
+            color: #f8fafc;
+            font-weight: 800;
+        }
+        .markdown-body h1 { font-size: 2.25rem; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem; }
+        .markdown-body h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; color: #14b8a6; }
+        .markdown-body h3 { font-size: 1.15rem; margin-top: 1.75rem; margin-bottom: 0.75rem; color: #94a3b8; }
+        .markdown-body p { margin-bottom: 1rem; line-height: 1.7; color: #cbd5e1; }
+        .markdown-body ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1rem; color: #cbd5e1; }
+        .markdown-body li { margin-bottom: 0.35rem; }
+        .markdown-body table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.85rem; }
+        .markdown-body th, .markdown-body td { border: 1px solid #1e293b; padding: 0.75rem; text-align: left; }
+        .markdown-body th { background: #0f172a; color: #14b8a6; font-weight: 700; }
+        .markdown-body tr:nth-child(even) { background: rgba(15, 23, 42, 0.3); }
+        .markdown-body pre { background: #090d16; padding: 1rem; border-radius: 0.75rem; border: 1px solid #1e293b; overflow-x: auto; margin: 1rem 0; }
+        .markdown-body code { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #2dd4bf; background: rgba(20, 184, 166, 0.1); padding: 0.2rem 0.4rem; border-radius: 0.25rem; }
+        .markdown-body pre code { background: transparent; padding: 0; color: #e2e8f0; }
+    </style>
+</head>
+<body class="h-full flex flex-col text-sm antialiased selection:bg-teal-500 selection:text-slate-950">
+
+    <header class="h-16 border-b border-slate-800/80 bg-[#020617]/90 backdrop-blur-xl sticky top-0 z-40 flex items-center justify-between px-4 lg:px-8">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-teal-500 via-cyan-500 to-indigo-600 flex items-center justify-center text-slate-950 font-extrabold text-xl shadow-lg shadow-teal-500/30">
+                L
+            </div>
+            <div>
+                <div class="flex items-center gap-2">
+                    <span class="font-bold text-slate-100 tracking-wider text-base">LUNUL NULLNET</span>
+                    <span class="px-2.5 py-0.5 text-[10px] font-extrabold rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/30">TECHNICAL WHITEPAPER v2.4</span>
+                </div>
+                <p class="hidden sm:block text-[11px] text-slate-400">High-Performance Fee-Only Zero-Knowledge Privacy Architecture</p>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <a href="index.html" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-800/80 text-slate-300 hover:bg-slate-700 hover:text-white transition-all flex items-center gap-1.5 border border-slate-700/50">
+                <svg class="w-4 h-4 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                <span>Launch App Simulator</span>
+            </a>
+            <button onclick="window.print()" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-teal-500/10 text-teal-400 border border-teal-500/30 hover:bg-teal-500/20 transition-all flex items-center gap-1.5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                <span>Export PDF</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="flex-1 flex overflow-hidden">
+        <!-- Sidebar Table of Contents -->
+        <aside class="w-72 bg-[#020617] border-r border-slate-800/80 hidden lg:flex flex-col p-6 space-y-4 overflow-y-auto">
+            <div class="text-[11px] font-extrabold text-slate-500 tracking-wider uppercase">Table of Contents</div>
+            <nav class="space-y-1.5 text-xs">
+                <a href="#abstract" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-teal-400 hover:bg-slate-900 transition-colors font-medium">Abstract</a>
+                <a href="#introduction" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-teal-400 hover:bg-slate-900 transition-colors font-medium">1. Introduction & Background</a>
+                <a href="#crypto-layer" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-teal-400 hover:bg-slate-900 transition-colors font-medium">2. Cryptographic & Privacy Layer</a>
+                <a href="#consensus" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-teal-400 hover:bg-slate-900 transition-colors font-medium">3. BFT Consensus & Fee-Only Model</a>
+                <a href="#tokenomics" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-teal-400 hover:bg-slate-900 transition-colors font-medium">4. Genesis Block & Tokenomics</a>
+                <a href="#setup" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-teal-400 hover:bg-slate-900 transition-colors font-medium">5. Setup & Node Deployment</a>
+                <a href="#governance" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-teal-400 hover:bg-slate-900 transition-colors font-medium">6. Quadratic Governance Model</a>
+                <a href="#conclusion" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-teal-400 hover:bg-slate-900 transition-colors font-medium">7. Conclusion</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 overflow-y-auto p-6 lg:p-12 bg-[#020617]">
+            <div class="max-w-4xl mx-auto glass-panel p-8 lg:p-12 rounded-3xl border border-slate-800/80 markdown-body space-y-8">
+                
+                <section id="abstract">
+                    <h1>Lunul (LUN) Null Net: Comprehensive Technical Whitepaper</h1>
+                    <p class="text-sm font-medium text-teal-400">A High-Performance, Fee-Only, Zero-Knowledge Privacy Architecture with BFT Finality</p>
+                    <hr class="border-slate-800 my-6">
+                    <h2>Abstract</h2>
+                    <p>As blockchain adoption matures globally, the tension between ledger transparency and user confidentiality has reached a critical juncture. While high-throughput layer-1 networks successfully scale transaction execution, they do so by sacrificing user privacy, exposing account balances, transaction graphs, and counterparty relationships. Conversely, legacy privacy coins often compromise throughput, user experience, and programmatic smart contract composability.</p>
+                    <p><strong>Lunul (Null Net)</strong> introduces an advanced paradigm: a high-output, parallelized zero-knowledge transaction architecture backed by a Tendermint-style Byzantine Fault Tolerant (BFT) consensus engine. By anchoring state transitions in Pedersen commitments, Groth16 zk-SNARK circuits, and a deterministic spent nullifier database, Lunul achieves complete transactional confidentiality alongside sub-second finality and over 65,000 transactions per second (TPS).</p>
+                </section>
+
+                <section id="introduction">
+                    <h2>1. Introduction & Background</h2>
+                    <p>The modern blockchain landscape is split into two distinct paradigms:</p>
+                    <ul>
+                        <li><strong>High-Performance Public Ledgers:</strong> Networks optimized for raw throughput (such as Solana or parallelized EVMs) which leave all data visible in plaintext, exposing users to financial surveillance.</li>
+                        <li><strong>Anonymity-Centric Networks:</strong> Blockchains like Monero or Zcash that prioritize privacy but struggle with high-throughput execution, complex smart contract composability, or heavy proof generation times.</li>
+                    </ul>
+                    <p>Lunul reconciles these divergent goals by embedding zero-knowledge proofs directly into the state transition function. Transactions are private by default, concealing the sender, receiver, and transferred value $v$ via cryptographic commitments, while remaining fully verifiable by decentralized BFT validators.</p>
+                    
+                    <h3>Core Objectives</h3>
+                    <ul>
+                        <li><strong>Default Privacy:</strong> Obfuscating sender identities, recipient addresses, and transfer amounts using Pedersen commitments and stealth routing.</li>
+                        <li><strong>Extreme Scalability:</strong> Achieving over 65,000 TPS through parallelized execution and optimized zk-SNARK constraint verification.</li>
+                        <li><strong>Fee-Only Economic Model:</strong> Eliminating inflationary block subsidies in favor of direct public fee extraction ($\sum \text{Inputs} = \sum \text{Outputs} + \text{Fee}$).</li>
+                        <li><strong>Ecosystem Compatibility:</strong> Seamless developer onboarding via familiar tooling, libraries, and cross-chain bridging primitives.</li>
+                    </ul>
+                </section>
+
+                <section id="crypto-layer">
+                    <h2>2. Core Cryptographic and Privacy Layer</h2>
+                    
+                    <h3>2.1 Pedersen Commitments and Blinding Factors</h3>
+                    <p>In Lunul, unspent transaction outputs (UTXOs) are not recorded as raw plaintext amounts. Instead, they are represented as cryptographic commitments on elliptic curves:</p>
+                    <p class="text-center font-mono my-4 text-teal-300">$$C = r \cdot G + v \cdot H$$</p>
+                    <p>Where:</p>
+                    <ul>
+                        <li>$v$ is the raw transfer value.</li>
+                        <li>$r$ is a randomly generated 256-bit blinding factor (scalar).</li>
+                        <li>$G$ and $H$ are independent generators of the elliptic curve group (specifically utilizing the BN254 / alt_bn128 pairing-friendly curve).</li>
+                    </ul>
+                    <p>Neither validators nor external observers can extract the value $v$ or blinding factor $r$ from $C$ alone, preserving strict confidentiality while permitting homomorphic validation of value conservation.</p>
+
+                    <h3>2.2 Nullifier Double-Spend Barrier</h3>
+                    <p>To prevent double-spending without revealing which UTXO is being spent, Lunul utilizes deterministic nullifiers. When a UTXO at index $i$ is consumed, the owner computes a nullifier using their secret spending key ($SK$):</p>
+                    <p class="text-center font-mono my-4 text-indigo-300">$$\text{Nullifier} = \text{Hash}(SK, \text{UTXO\_Index})$$</p>
+                    <p>The resulting nullifier hash is published to the global <strong>Spent Nullifier Set</strong>. If a nullifier is submitted a second time, the state machine instantly rejects the transaction, preventing double-spending while preserving recipient and sender anonymity.</p>
+
+                    <h3>2.3 Groth16 ZK-SNARK Prover Pipeline & QAP Mathematics</h3>
+                    <p>Client-side wallets execute arithmetic circuit constraints in WebAssembly (WASM) before broadcasting transactions. Lunul employs the <strong>Groth16</strong> proving system over pairing-friendly elliptic curves.</p>
+                    <p>Quadratic Arithmetic Programs (QAPs) translate circuit constraints into polynomial relations. Let the witness polynomials satisfy $A(x)B(x) - C(x) = H(x)T(x)$. The pairing equation verified by validators is:</p>
+                    <p class="text-center font-mono my-4 text-purple-300">$$e(A, B) = e(\alpha, \beta) \cdot e(L, \gamma) \cdot e(C, \delta)$$</p>
+                    <p>This ensures that the transaction satisfies conservation of value ($\sum \text{Inputs} = \sum \text{Outputs} + \text{Fee}$) without revealing any underlying private parameters.</p>
+                </section>
+
+                <section id="consensus">
+                    <h2>3. BFT Consensus Engine & Fee-Only Incentive Model</h2>
+                    
+                    <h3>3.1 Tendermint-Style BFT Consensus</h3>
+                    <p>Lunul utilizes a robust 4-phase BFT consensus protocol across decentralized validator nodes (Alpha, Beta, Gamma, Delta):</p>
+                    <ol class="list-decimal pl-5 space-y-1 text-slate-300">
+                        <li><strong>Pre-vote:</strong> Validators sign proposals and verify cryptographic proofs of incoming batches.</li>
+                        <li><strong>Pre-commit:</strong> Supermajority threshold signatures ($>2/3$) lock in the block proposal.</li>
+                        <li><strong>Commit:</strong> The block is appended to the ledger state tree.</li>
+                        <li><strong>Execute:</strong> State updates (new commitments added, nullifiers marked spent) are finalized.</li>
+                    </ol>
+
+                    <h3>3.2 Fee-Only Economic Model</h3>
+                    <p>Unlike traditional blockchains that rely on inflationary block rewards, Lunul operates on a <strong>fee-only economic model</strong>. Validators process transactions exclusively for explicit public fees attached to the ZK balance relation:</p>
+                    <p class="text-center font-mono my-4 text-amber-300">$$\text{Fee} = \sum \text{Inputs}_{\text{value}} - \sum \text{Outputs}_{\text{value}}$$</p>
+                    <p>This design guarantees long-term economic sustainability without coin dilution.</p>
+                </section>
+
+                <section id="tokenomics">
+                    <h2>4. Genesis Block, Tokenomics & Supply</h2>
+                    <p>The native utility and governance token of the Lunul ecosystem is <strong>LUN</strong>.</p>
+                    
+                    <h3>4.1 Token Supply & Distribution</h3>
+                    <p><strong>Total Fixed Supply:</strong> 1,000,000,000 (1 Billion) LUN.</p>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Percentage</th>
+                                <th>Amount (LUN)</th>
+                                <th>Purpose & Vesting</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Community Rewards</td><td>10%</td><td>100,000,000</td><td>Staking rewards, developer grants, and ecosystem airdrops.</td></tr>
+                            <tr><td>Ecosystem Incentives</td><td>10%</td><td>100,000,000</td><td>Fostering privacy-first dApps and partner integrations.</td></tr>
+                            <tr><td>Validator Rewards</td><td>10%</td><td>100,000,000</td><td>Unlocked linearly over the first 3 years to secure consensus.</td></tr>
+                            <tr><td>Investors (Seed)</td><td>10%</td><td>100,000,000</td><td>Issued at $0.05 ($5M raised); 25% at launch, 2-year linear vesting.</td></tr>
+                            <tr><td>Team and Advisors</td><td>10%</td><td>100,000,000</td><td>Core engineering and strategic advisory alignment.</td></tr>
+                            <tr><td>Marketing & Partnerships</td><td>10%</td><td>100,000,000</td><td>Exchange liquidity, brand visibility, and adoption campaigns.</td></tr>
+                            <tr><td>Reserve Fund</td><td>5%</td><td>50,000,000</td><td>Emergency capital buffer and strategic treasury allocation.</td></tr>
+                            <tr><td>Liquidity & Market Ops</td><td>35%</td><td>350,000,000</td><td>DEX pools and market-making stability.</td></tr>
+                            <tr><td><strong>Total</strong></td><td><strong>100%</strong></td><td><strong>1,000,000,000</strong></td><td><strong>Fully defined genesis allocation.</strong></td></tr>
+                        </tbody>
+                    </table>
+
+                    <h3>4.2 Deflationary Burn Mechanism</h3>
+                    <p>To counteract circulation expansion, <strong>10% of all transaction and bridge fees</strong> are permanently burned, while dynamic fee adjustments maintain network accessibility.</p>
+                </section>
+
+                <section id="setup">
+                    <h2>5. Network Setup and Deployment Guide</h2>
+                    
+                    <h3>5.1 System Requirements for Validators</h3>
+                    <ul>
+                        <li><strong>CPU:</strong> 16+ Cores (optimized for multi-scalar multiplication and pairing checks).</li>
+                        <li><strong>RAM:</strong> 64 GB ECC Memory.</li>
+                        <li><strong>Storage:</strong> 2 TB NVMe SSD (fast I/O for nullifier state tree lookups).</li>
+                        <li><strong>Network:</strong> 1 Gbps symmetrical unmetered connection.</li>
+                    </ul>
+
+                    <h3>5.2 Initializing a Validator Node</h3>
+                    <pre><code># Clone the official Lunul runtime repository
+git clone https://github.com/lunul-network/nullnet-core.git
+cd nullnet-core
+
+# Install Rust toolchain and dependencies
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+cargo build --release
+
+# Initialize genesis state and configure validator keys
+./target/release/nullnet init --validator-name "Validator-Alpha" --chain-id lunul-mainnet-1</code></pre>
+                </section>
+
+                <section id="governance">
+                    <h2>6. Governance Model</h2>
+                    <p>Governance over protocol upgrades, fee parameters, and treasury allocation is managed via <strong>Quadratic Voting</strong> by LUN token holders.</p>
+                    <ul>
+                        <li><strong>Proposal Submission:</strong> Requires staking a minimum threshold of LUN.</li>
+                        <li><strong>Voting Period:</strong> Active for 14 days with a mandatory 25% quorum participation.</li>
+                        <li><strong>Quadratic Weighting:</strong> Voting power $VP$ is calculated as $VP = \sqrt{\text{Tokens Staked}}$, preventing plutocratic capture while giving voice to smaller community stakeholders.</li>
+                    </ul>
+                </section>
+
+                <section id="conclusion">
+                    <h2>7. Conclusion</h2>
+                    <p>Lunul Null Net successfully bridges the gap between ultra-high performance and uncompromising privacy. By marrying parallelized execution, Groth16 ZK-SNARKs, Pedersen commitments, and a deflationary fee-only BFT model, Lunul provides a robust foundation for the next generation of private decentralized applications, enterprise finance, and cross-chain settlements.</p>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Automatic KaTeX re-render on load
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof renderMathInElement === 'function') {
+                renderMathInElement(document.body, {
+                    delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '$', right: '$', display: false}
+                    ]
+                });
+            }
+        });
+    </script>
+</body>
 </html>
