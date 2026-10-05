@@ -398,29 +398,33 @@
         </p>
       </section>
 
-      <!-- Section 5 -->
-      <section id="deployment">
-        <h2><i class="fa-solid fa-terminal text-emerald-400"></i> 5. Network Setup and Deployment Guide</h2>
-        
-        <h3>5.1 System Requirements for Validators</h3>
+      <!-- Section 5 (Newly Replaced: Cross-Chain Bridge & Recursive Proof Aggregation) -->
+      <section id="bridge">
+        <h2><i class="fa-solid fa-bridge text-cyan-400"></i> 5. Cross-Chain Bridge & Recursive Proof Aggregation</h2>
+        <p>
+          To ensure Lunul does not operate as an isolated silo, Null Net incorporates a trust-minimized, zero-knowledge cross-chain interoperability layer. This mechanism allows users to deposit assets from external layer-1 and layer-2 networks into Lunul's private state, execute confidential transactions, and withdraw securely without exposing transfer graphs to public explorers.
+        </p>
+
+        <h3>5.1 Recursive zk-SNARK Proof Aggregation</h3>
+        <p>
+          Verifying individual transaction proofs across heterogeneous consensus layers incurs prohibitive gas costs and high latency. Lunul resolves this by implementing recursive proof aggregation. Individual transaction proofs <code>&pi;<sub>1</sub>, &pi;<sub>2</sub>, ..., &pi;<sub>n</sub></code> generated in a batch are folded into a single concise aggregate proof <code>&Pi;<sub>agg</sub></code> using incremental multiscalar multiplication (MSM) reduction algorithms.
+        </p>
+        <p class="font-mono-code bg-purple-950/40 p-3 rounded-xl border border-purple-500/30 text-purple-300 text-center">
+          <code>Verify(VK<sub>agg</sub>, &Pi;<sub>agg</sub>, {PublicInputs}) = True</code>
+        </p>
+        <p>
+          This recursive pipeline compresses thousands of state transitions into a constant-size cryptographic proof that can be verified in O(1) time by destination smart contracts on external chains.
+        </p>
+
+        <h3>5.2 Decentralized Light Client Relay</h3>
+        <p>
+          External chain state is monitored and relayed via decentralized BFT validator committees running stateless light client verification circuits. 
+        </p>
         <ul>
-          <li><strong>CPU:</strong> 16+ Cores (optimized for multi-scalar multiplication and pairing checks).</li>
-          <li><strong>RAM:</strong> 64 GB ECC Memory.</li>
-          <li><strong>Storage:</strong> 2 TB NVMe SSD (fast I/O for nullifier state tree lookups).</li>
-          <li><strong>Network:</strong> 1 Gbps symmetrical unmetered connection.</li>
+          <li><strong>Lock-and-Mint / Burn-and-Release:</strong> Assets locked in external bridge contracts generate cryptographic inclusion receipts.</li>
+          <li><strong>Fraud & Validity Proving:</strong> Bridge withdrawal requests require a valid nullifier generation proof, preventing double-withdrawals across interconnected chains.</li>
+          <li><strong>Asynchronous Finality Anchoring:</strong> Bridge transfers settle on Lunul once the underlying BFT epoch achieves finality, eliminating probabilistic reorg risks.</li>
         </ul>
-
-        <h3>5.2 Initializing a Validator Node</h3>
-        <pre><code># Clone the official Lunul runtime repository
-git clone https://github.com/lunul-network/nullnet-core.git
-cd nullnet-core
-
-# Install Rust toolchain and dependencies
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-cargo build --release
-
-# Initialize genesis state and configure validator keys
-./target/release/nullnet init --validator-name "Validator-Alpha" --chain-id lunul-mainnet-1</code></pre>
       </section>
 
       <!-- Section 6 -->
