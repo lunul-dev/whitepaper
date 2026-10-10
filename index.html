@@ -1,476 +1,343 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Technical Whitepaper | Lunul Foundation (LF)</title>
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="https://lunul.org/favi.png">
-  <link rel="apple-touch-icon" href="https://lunul.org/favi.png">
-
-  <!-- Google Fonts & Tailwind CSS -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lunul Foundation | Technical Whitepaper</title>
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { purple: { 400: '#c084fc', 500: '#a855f7', 600: '#9333ea' } } } } }
+  </script>
   <style>
-    body {
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: #030207;
-      color: #f3f4f6;
-      overflow-x: hidden;
-      min-height: 100vh;
-      scroll-behavior: smooth;
-    }
-    .font-mono-code {
-      font-family: 'JetBrains Mono', monospace;
-    }
-    .lunul-glow {
-      background: radial-gradient(circle at 50% -15%, rgba(147, 51, 234, 0.28) 0%, rgba(10, 10, 18, 0.98) 45%, #030207 100%);
-    }
-    .cardBg {
-      background: rgba(12, 10, 20, 0.85);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
-      transition: all 0.3s ease;
-    }
-    .cardBg:hover {
-      border-color: rgba(147, 51, 234, 0.4);
-    }
-    .btn-lunul {
-      background: linear-gradient(135deg, #9333ea 0%, #4f46e5 100%);
-      box-shadow: 0 4px 20px rgba(147, 51, 234, 0.35);
-      transition: all 0.25s ease;
-    }
-    .btn-lunul:hover {
-      box-shadow: 0 6px 28px rgba(147, 51, 234, 0.6);
-      transform: translateY(-1px);
-    }
-    ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: rgba(3, 2, 7, 0.8);
-    }
-    ::-webkit-scrollbar-thumb {
-      background: rgba(147, 51, 234, 0.3);
-      border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: rgba(147, 51, 234, 0.6);
-    }
-    .whitepaper-content h2 {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: #ffffff;
-      margin-top: 2.5rem;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding-bottom: 0.5rem;
-    }
-    .whitepaper-content h3 {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #e9d5ff;
-      margin-top: 1.5rem;
-      margin-bottom: 0.75rem;
-    }
-    .whitepaper-content p {
-      color: #cbd5e1;
-      font-size: 0.925rem;
-      line-height: 1.7;
-      margin-bottom: 1rem;
-    }
-    .whitepaper-content ul {
-      list-style-type: disc;
-      padding-left: 1.5rem;
-      color: #cbd5e1;
-      font-size: 0.925rem;
-      margin-bottom: 1rem;
-    }
-    .whitepaper-content li {
-      margin-bottom: 0.5rem;
-    }
-    .whitepaper-content code {
-      font-family: 'JetBrains Mono', monospace;
-      background: rgba(147, 51, 234, 0.15);
-      color: #e9d5ff;
-      padding: 0.2rem 0.4rem;
-      border-radius: 4px;
-      font-size: 0.85rem;
-      border: 1px solid rgba(147, 51, 234, 0.3);
-    }
-    .whitepaper-content pre {
-      background: #09070f;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 1rem;
-      border-radius: 0.75rem;
-      overflow-x: auto;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
-      color: #e2e8f0;
-      margin-bottom: 1.25rem;
-    }
-    .table-container {
-      overflow-x: auto;
-      margin-bottom: 1.5rem;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-      font-size: 0.875rem;
-    }
-    th, td {
-      padding: 0.75rem 1rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    th {
-      background: rgba(147, 51, 234, 0.15);
-      color: #ffffff;
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 700;
-    }
-    td {
-      color: #cbd5e1;
-    }
-    tr:hover td {
-      background: rgba(255, 255, 255, 0.02);
-    }
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;800&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .font-mono-code { font-family: 'JetBrains Mono', monospace; }
+    html { scroll-behavior: smooth; }
   </style>
 </head>
-<body class="lunul-glow flex flex-col justify-between selection:bg-purple-500 selection:text-white">
+<body class="bg-black text-slate-100 min-h-screen selection:bg-purple-500 selection:text-white flex flex-col justify-between overflow-x-hidden">
 
-  <!-- Shared Header Navbar -->
-  <header class="w-full max-w-7xl mx-auto px-4 sm:px-6 py-5 flex justify-between items-center gap-4 border-b border-white/10 sticky top-0 z-50 bg-[#030207]/80 backdrop-blur-xl">
-    <a href="https://lunul.org" class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-emerald-500 flex items-center justify-center font-extrabold text-white text-xl shadow-lg">
-        L
-      </div>
-      <div class="flex flex-col">
-        <span class="text-xl font-extrabold tracking-tight text-white flex items-center gap-2">
-          LUNUL <span class="text-[10px] bg-purple-950 text-purple-300 border border-purple-500/40 px-2 py-0.5 rounded-md font-mono-code font-bold">FOUNDATION</span>
-        </span>
-        <span class="text-[10px] text-purple-400 font-mono-code font-semibold">TECHNICAL WHITEPAPER</span>
-      </div>
-    </a>
+  <!-- SHARED HEADER NAVIGATION WITH BURGER MENU -->
+  <header class="border-b border-white/10 bg-black/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-6">
+        <a href="index.html" class="flex items-center space-x-3">
+          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center font-bold text-white shadow-lg shadow-purple-500/30">L</div>
+          <span class="font-extrabold tracking-wider text-white hidden sm:inline font-mono-code">LUNUL FOUNDATION</span>
+        </a>
 
-    <!-- Nav Links with Ecosystem Links -->
-    <div class="hidden md:flex items-center gap-6 text-xs font-mono-code font-semibold text-slate-300">
-      <a href="https://lunul.org" target="_blank" class="hover:text-purple-400 transition flex items-center gap-1">Ecosystem <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-70"></i></a>
-      <a href="https://app.lunul.org" target="_blank" class="hover:text-purple-400 transition flex items-center gap-1">App & DEX <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-70"></i></a>
-      <a href="https://docs.lunul.org" target="_blank" class="hover:text-purple-400 transition flex items-center gap-1">Docs <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-70"></i></a>
-      <a href="https://whitepaper.lunul.org" target="_blank" class="text-purple-400 font-bold transition flex items-center gap-1">Whitepaper <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-70"></i></a>
+        <!-- DESKTOP NAV -->
+        <nav class="hidden lg:flex items-center space-x-1 font-mono-code text-xs">
+          <a href="index.html" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Ecosystem</a>
+          <a href="presale.html" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">App & DEX</a>
+          <a href="https://docs.lunul.org" target="_blank" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Docs</a>
+          <a href="whitepaper.html" class="px-3 py-2 rounded-lg bg-white/10 text-white transition">Whitepaper</a>
+          <a href="presale.html" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Portal</a>
+        </nav>
+      </div>
+
+      <div class="flex items-center space-x-3 font-mono-code text-xs">
+        <a href="presale.html" class="bg-purple-600 hover:bg-purple-500 text-white font-bold py-2 px-4 rounded-xl transition shadow-lg shadow-purple-500/20 flex items-center space-x-2">
+          <span>Launch App 🚀</span>
+        </a>
+        
+        <!-- MOBILE BURGER TOGGLE BUTTON -->
+        <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-slate-300 hover:text-white focus:outline-none cursor-pointer">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
     </div>
 
-    <!-- Quick Action / Status -->
-    <div class="flex items-center gap-3 font-mono-code">
-      <div class="hidden sm:flex items-center gap-2 bg-purple-950/60 border border-purple-500/30 px-3 py-1.5 rounded-xl text-xs text-purple-300">
-        <i class="fa-solid fa-shield-halved text-emerald-400"></i> Null Net v1.0
-      </div>
-      <a href="mailto:investors@lunul.org" class="btn-lunul text-white font-semibold px-4 py-2 rounded-xl text-xs flex items-center gap-2">
-        <i class="fa-solid fa-envelope text-[10px]"></i>
-        <span>Contact LF</span>
-      </a>
+    <!-- MOBILE DROPDOWN MENU -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-zinc-950 border-b border-white/10 px-6 py-4 space-y-2 font-mono-code text-xs">
+      <a href="index.html" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition">Ecosystem</a>
+      <a href="presale.html" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition">App & DEX</a>
+      <a href="https://docs.lunul.org" target="_blank" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition">Docs</a>
+      <a href="whitepaper.html" class="block px-3 py-2 rounded-lg bg-white/10 text-white transition">Whitepaper</a>
+      <a href="presale.html" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition">Portal</a>
     </div>
   </header>
 
-  <!-- Main Container -->
-  <main class="flex-grow max-w-4xl mx-auto px-4 sm:px-6 w-full py-12">
+  <!-- WHITEPAPER CONTAINER -->
+  <main class="max-w-5xl mx-auto px-6 py-16 space-y-12 flex-1 w-full">
     
-    <!-- Whitepaper Header Section -->
-    <div class="cardBg rounded-3xl p-8 sm:p-10 mb-10 border border-purple-500/30 space-y-6">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-950/80 border border-purple-500/40 text-purple-300 text-xs font-mono-code font-semibold shadow-lg">
-        <i class="fa-solid fa-file-shield text-purple-400"></i> LUNUL (LUN) &bull; TECHNICAL WHITEPAPER
+    <!-- HERO HEADER -->
+    <div class="relative overflow-hidden rounded-3xl bg-zinc-950/60 backdrop-blur-xl border border-white/10 p-8 sm:p-14 text-center space-y-6 shadow-2xl shadow-purple-500/10">
+      <div class="absolute -right-20 -top-20 w-72 h-72 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -left-20 -bottom-20 w-72 h-72 bg-indigo-600/15 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 space-y-4 max-w-3xl mx-auto font-mono-code">
+        <span class="text-xs font-bold text-purple-400 uppercase tracking-widest bg-purple-500/10 border border-purple-500/20 px-4 py-1.5 rounded-full inline-block">
+          NULL NET PROTOCOL SPECIFICATION v1.0
+        </span>
+        <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
+          LUNUL (LUN) • TECHNICAL WHITEPAPER
+        </h1>
+        <p class="text-sm sm:text-base text-slate-300 font-sans leading-relaxed">
+          A High-Performance, Fee-Only, Zero-Knowledge Private EVM Architecture with BFT Finality
+        </p>
+        <div class="text-xs text-slate-500 pt-2">
+          Published by the Lunul Foundation (LF) &bull; Corporate Privacy-as-a-Service
+        </div>
       </div>
 
-      <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
-        A High-Performance, Fee-Only, Zero-Knowledge Privacy Architecture with BFT Finality
-      </h1>
-
-      <p class="text-slate-300 text-sm font-mono-code leading-relaxed">
-        Published by the Lunul Foundation (LF) &bull; Null Net Protocol Specification v1.0
-      </p>
-
-      <div class="pt-2 flex flex-wrap gap-4 text-xs font-mono-code">
-        <a href="#abstract" class="bg-purple-950/60 border border-purple-500/30 px-4 py-2 rounded-xl text-purple-300 hover:text-white transition">Jump to Abstract</a>
-        <a href="#cryptography" class="cardBg px-4 py-2 rounded-xl border border-white/10 text-slate-300 hover:text-white transition">Core Cryptography</a>
-        <a href="#tokenomics" class="cardBg px-4 py-2 rounded-xl border border-white/10 text-slate-300 hover:text-white transition">Tokenomics & Supply</a>
+      <!-- JUMP LINKS BAR -->
+      <div class="relative z-10 flex flex-wrap items-center justify-center gap-3 pt-6 font-mono-code text-xs">
+        <a href="#abstract" class="bg-zinc-900 hover:bg-zinc-800 text-slate-300 border border-white/10 py-2 px-4 rounded-xl transition">Jump to Abstract</a>
+        <a href="#cryptography" class="bg-zinc-900 hover:bg-zinc-800 text-slate-300 border border-white/10 py-2 px-4 rounded-xl transition">Core Cryptography</a>
+        <a href="#tokenomics" class="bg-zinc-900 hover:bg-zinc-800 text-slate-300 border border-white/10 py-2 px-4 rounded-xl transition">Tokenomics & Supply</a>
       </div>
     </div>
 
-    <!-- Whitepaper Body Content -->
-    <div class="cardBg rounded-3xl p-8 sm:p-12 whitepaper-content border border-white/10 space-y-8">
+    <!-- WHITEPAPER CONTENT WRAPPER -->
+    <div class="space-y-12 font-sans text-slate-300 text-sm sm:text-base leading-relaxed bg-zinc-950/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 sm:p-12 shadow-2xl">
       
-      <!-- Abstract -->
-      <section id="abstract">
-        <h2><i class="fa-solid fa-bookmark text-purple-400"></i> Abstract</h2>
+      <!-- ABSTRACT -->
+      <section id="abstract" class="space-y-4">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-white font-mono-code flex items-center space-x-3">
+          <span class="text-purple-400">#</span>
+          <span>Abstract</span>
+        </h2>
         <p>
           As blockchain adoption matures globally, the tension between ledger transparency and user confidentiality has reached a critical juncture. While high-throughput layer-1 networks successfully scale transaction execution, they do so by sacrificing user privacy, exposing account balances, transaction graphs, and counterparty relationships. Conversely, legacy privacy coins often compromise throughput, user experience, and programmatic smart contract composability.
         </p>
         <p>
-          Lunul (Null Net) introduces an advanced paradigm: a high-output, parallelized zero-knowledge transaction architecture backed by a Tendermint-style Byzantine Fault Tolerant (BFT) consensus engine. By anchoring state transitions in Pedersen commitments, Groth16 zk-SNARK circuits, and a deterministic spent nullifier database, Lunul achieves complete transactional confidentiality alongside sub-second finality and over 65,000 transactions per second (TPS).
+          Lunul (Null Net) introduces an advanced paradigm: an EVM-compatible, high-output, parallelized zero-knowledge transaction architecture backed by a Tendermint-style Byzantine Fault Tolerant (BFT) consensus engine. By anchoring state transitions in Pedersen commitments, Groth16 zk-SNARK circuits, and a deterministic spent nullifier database, Lunul achieves complete transactional confidentiality alongside sub-second finality and over 65,000 transactions per second (TPS).
         </p>
       </section>
 
-      <!-- Section 1 -->
-      <section id="introduction">
-        <h2><i class="fa-solid fa-compass text-indigo-400"></i> 1. Introduction & Background</h2>
+      <hr class="border-white/10">
+
+      <!-- SECTION 1 -->
+      <section id="introduction" class="space-y-4">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-white font-mono-code flex items-center space-x-3">
+          <span class="text-purple-400">1.</span>
+          <span>Introduction & Background</span>
+        </h2>
         <p>The modern blockchain landscape is split into two distinct paradigms:</p>
-        <ul>
-          <li><strong>High-Performance Public Ledgers:</strong> Networks optimized for raw throughput (such as Solana or parallelized EVMs) which leave all data visible in plaintext, exposing users to financial surveillance.</li>
-          <li><strong>Anonymity-Centric Networks:</strong> Blockchains like Monero or Zcash that prioritize privacy but struggle with high-throughput execution, complex smart contract composability, or heavy proof generation times.</li>
+        <ul class="list-disc pl-6 space-y-2 text-slate-300">
+          <li><strong class="text-white">High-Performance Public Ledgers:</strong> Networks optimized for raw throughput (such as parallelized EVMs) which leave all data visible in plaintext, exposing users to financial surveillance.</li>
+          <li><strong class="text-white">Anonymity-Centric Networks:</strong> Blockchains that prioritize privacy but struggle with high-throughput execution, complex smart contract composability, or heavy proof generation times.</li>
         </ul>
         <p>
-          Lunul reconciles these divergent goals by embedding zero-knowledge proofs directly into the state transition function. Transactions are private by default, concealing the sender, receiver, and transferred value <code>v</code> via cryptographic commitments, while remaining fully verifiable by decentralized BFT validators.
+          Lunul reconciles these divergent goals by embedding zero-knowledge proofs directly into the state transition function. Transactions are private by default, concealing the sender, receiver, and transferred value $v$ via cryptographic commitments, while remaining fully verifiable by decentralized BFT validators.
         </p>
-
-        <h3>Core Objectives</h3>
-        <ul>
-          <li><strong>Default Privacy:</strong> Obfuscating sender identities, recipient addresses, and transfer amounts using Pedersen commitments and stealth routing.</li>
-          <li><strong>Extreme Scalability:</strong> Achieving over 65,000 TPS through parallelized execution and optimized zk-SNARK constraint verification.</li>
-          <li><strong>Fee-Only Economic Model:</strong> Eliminating inflationary block subsidies in favor of direct public fee extraction (<code>&sum; Inputs = &sum; Outputs + Fee</code>).</li>
-          <li><strong>Ecosystem Compatibility:</strong> Seamless developer onboarding via familiar tooling, libraries, and cross-chain bridging primitives.</li>
-        </ul>
-      </section>
-
-      <!-- Section 2 -->
-      <section id="cryptography">
-        <h2><i class="fa-solid fa-lock text-emerald-400"></i> 2. Core Cryptographic and Privacy Layer</h2>
         
-        <h3>2.1 Pedersen Commitments and Blinding Factors</h3>
-        <p>
-          In Lunul, unspent transaction outputs (UTXOs) are not recorded as raw plaintext amounts. Instead, they are represented as cryptographic commitments on elliptic curves:
-        </p>
-        <p class="font-mono-code bg-purple-950/40 p-3 rounded-xl border border-purple-500/30 text-purple-300 text-center">
-          <code>C = r &middot; G + v &middot; H</code>
-        </p>
-        <p>Where:</p>
-        <ul>
-          <li><code>v</code> is the raw transfer value.</li>
-          <li><code>r</code> is a randomly generated 256-bit blinding factor (scalar).</li>
-          <li><code>G</code> and <code>H</code> are independent generators of the elliptic curve group (specifically utilizing the BN254 / alt_bn128 pairing-friendly curve).</li>
-        </ul>
-        <p>
-          Neither validators nor external observers can extract the value <code>v</code> or blinding factor <code>r</code> from <code>C</code> alone, preserving strict confidentiality while permitting homomorphic validation of value conservation.
-        </p>
-
-        <h3>2.2 Nullifier Double-Spend Barrier</h3>
-        <p>
-          To prevent double-spending without revealing which UTXO is being spent, Lunul utilizes deterministic nullifiers. When a UTXO at index <code>i</code> is consumed, the owner computes a nullifier using their secret spending key (<code>SK</code>):
-        </p>
-        <p class="font-mono-code bg-purple-950/40 p-3 rounded-xl border border-purple-500/30 text-purple-300 text-center">
-          <code>Nullifier = Hash(SK, UTXO_Index)</code>
-        </p>
-        <p>
-          The resulting nullifier hash is published to the global Spent Nullifier Set. If a nullifier is submitted a second time, the state machine instantly rejects the transaction, preventing double-spending while preserving recipient and sender anonymity.
-        </p>
-
-        <h3>2.3 Groth16 ZK-SNARK Prover Pipeline & QAP Mathematics</h3>
-        <p>
-          Client-side wallets execute arithmetic circuit constraints in WebAssembly (WASM) before broadcasting transactions. Lunul employs the Groth16 proving system over pairing-friendly elliptic curves.
-        </p>
-        <p>
-          Quadratic Arithmetic Programs (QAPs) translate circuit constraints into polynomial relations. Let the witness polynomials satisfy <code>A(x)B(x) - C(x) = H(x)T(x)</code>. The pairing equation verified by validators is:
-        </p>
-        <p class="font-mono-code bg-purple-950/40 p-3 rounded-xl border border-purple-500/30 text-purple-300 text-center">
-          <code>e(A, B) = e(&alpha;, &beta;) &middot; e(L, &gamma;) &middot; e(C, &delta;)</code>
-        </p>
-        <p>
-          This ensures that the transaction satisfies conservation of value (<code>&sum; Inputs = &sum; Outputs + Fee</code>) without revealing any underlying private parameters.
-        </p>
+        <div class="bg-black/40 border border-white/5 rounded-2xl p-6 space-y-3 font-mono-code text-xs">
+          <div class="text-purple-400 font-bold uppercase tracking-wider">Core Objectives</div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-slate-300">
+            <div>• <strong class="text-white">Default Privacy:</strong> Obfuscating sender identities, recipient addresses, and transfer amounts using Pedersen commitments.</div>
+            <div>• <strong class="text-white">Extreme Scalability:</strong> Achieving over 65,000 TPS through parallelized execution and optimized zk-SNARK constraints.</div>
+            <div>• <strong class="text-white">Fee-Only Economic Model:</strong> Eliminating inflationary block subsidies in favor of direct public fee extraction ($\sum \text{Inputs} = \sum \text{Outputs} + \text{Fee}$).</div>
+            <div>• <strong class="text-white">Ecosystem Compatibility:</strong> Seamless developer onboarding via familiar EVM tooling, libraries, and cross-chain bridging primitives.</div>
+          </div>
+        </div>
       </section>
 
-      <!-- Section 3 -->
-      <section id="consensus">
-        <h2><i class="fa-solid fa-server text-amber-400"></i> 3. BFT Consensus Engine & Fee-Only Incentive Model</h2>
+      <hr class="border-white/10">
+
+      <!-- SECTION 2 -->
+      <section id="cryptography" class="space-y-6">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-white font-mono-code flex items-center space-x-3">
+          <span class="text-purple-400">2.</span>
+          <span>Core Cryptographic and Privacy Layer</span>
+        </h2>
+
+        <div class="space-y-3">
+          <h3 class="text-lg font-bold text-white font-mono-code">2.1 Pedersen Commitments and Blinding Factors</h3>
+          <p>
+            In Lunul, unspent transaction outputs (UTXOs) are not recorded as raw plaintext amounts. Instead, they are represented as cryptographic commitments on elliptic curves:
+          </p>
+          <div class="bg-black/60 border border-purple-500/30 p-4 rounded-xl text-center font-mono-code text-purple-300 text-sm">
+            $$C = r \cdot G + v \cdot H$$
+          </div>
+          <p class="text-xs text-slate-400">Where $v$ is the raw transfer value, $r$ is a randomly generated 256-bit blinding factor (scalar), and $G$ and $H$ are independent generators of the elliptic curve group (specifically utilizing the BN254 / alt_bn128 pairing-friendly curve).</p>
+        </div>
+
+        <div class="space-y-3 pt-2">
+          <h3 class="text-lg font-bold text-white font-mono-code">2.2 Nullifier Double-Spend Barrier</h3>
+          <p>
+            To prevent double-spending without revealing which UTXO is being spent, Lunul utilizes deterministic nullifiers. When a UTXO at index $i$ is consumed, the owner computes a nullifier using their secret spending key ($SK$):
+          </p>
+          <div class="bg-black/60 border border-purple-500/30 p-4 rounded-xl text-center font-mono-code text-purple-300 text-sm">
+            $$\text{Nullifier} = \text{Hash}(SK, \text{UTXO\_Index})$$
+          </div>
+          <p class="text-xs text-slate-400">The resulting nullifier hash is published to the global Spent Nullifier Set. If a nullifier is submitted a second time, the state machine instantly rejects the transaction.</p>
+        </div>
+
+        <div class="space-y-3 pt-2">
+          <h3 class="text-lg font-bold text-white font-mono-code">2.3 Groth16 ZK-SNARK Prover Pipeline & QAP Mathematics</h3>
+          <p>
+            Client-side wallets execute arithmetic circuit constraints in WebAssembly (WASM) before broadcasting transactions. Lunul employs the Groth16 proving system over pairing-friendly elliptic curves. Quadratic Arithmetic Programs (QAPs) translate circuit constraints into polynomial relations satisfying $A(x)B(x) - C(x) = H(x)T(x)$. The pairing equation verified by validators is:
+          </p>
+          <div class="bg-black/60 border border-purple-500/30 p-4 rounded-xl text-center font-mono-code text-purple-300 text-sm">
+            $$e(A, B) = e(\alpha, \beta) \cdot e(L, \gamma) \cdot e(C, \delta)$$
+          </div>
+        </div>
+      </section>
+
+      <hr class="border-white/10">
+
+      <!-- SECTION 3 -->
+      <section id="consensus" class="space-y-4">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-white font-mono-code flex items-center space-x-3">
+          <span class="text-purple-400">3.</span>
+          <span>BFT Consensus Engine & Fee-Only Incentive Model</span>
+        </h2>
+        <p>
+          Lunul utilizes a robust 4-phase BFT consensus protocol across decentralized validator nodes (Pre-vote, Pre-commit, Commit, Execute).
+        </p>
+        <div class="bg-black/40 border border-white/5 rounded-2xl p-6 space-y-3 font-mono-code text-xs">
+          <div class="text-purple-400 font-bold uppercase tracking-wider">Fee-Only Economic Model</div>
+          <p class="text-slate-300 font-sans">
+            Unlike traditional blockchains that rely on inflationary block rewards, Lunul operates on a fee-only economic model. Validators process transactions exclusively for explicit public fees attached to the ZK balance relation:
+          </p>
+          <div class="bg-black/60 border border-purple-500/30 p-3 rounded-xl text-center font-mono-code text-emerald-400">
+            $$\text{Fee} = \sum \text{Inputs}_{\text{value}} - \sum \text{Outputs}_{\text{value}}$$
+          </div>
+        </div>
+      </section>
+
+      <hr class="border-white/10">
+
+      <!-- SECTION 4: TOKENOMICS -->
+      <section id="tokenomics" class="space-y-6">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-white font-mono-code flex items-center space-x-3">
+          <span class="text-purple-400">4.</span>
+          <span>Genesis Block, Tokenomics & Supply</span>
+        </h2>
+        <p>The native utility and governance token of the Lunul ecosystem is <strong class="text-white">LUN</strong> with a fixed supply of <strong class="text-white">1,000,000,000 (1 Billion)</strong> tokens.</p>
         
-        <h3>3.1 Tendermint-Style BFT Consensus</h3>
-        <p>Lunul utilizes a robust 4-phase BFT consensus protocol across decentralized validator nodes (Alpha, Beta, Gamma, Delta):</p>
-        <ul>
-          <li><strong>Pre-vote:</strong> Validators sign proposals and verify cryptographic proofs of incoming batches.</li>
-          <li><strong>Pre-commit:</strong> Supermajority threshold signatures (<code>&gt; 2/3</code>) lock in the block proposal.</li>
-          <li><strong>Commit:</strong> The block is appended to the ledger state tree.</li>
-          <li><strong>Execute:</strong> State updates (new commitments added, nullifiers marked spent) are finalized.</li>
-        </ul>
-
-        <h3>3.2 Fee-Only Economic Model</h3>
-        <p>
-          Unlike traditional blockchains that rely on inflationary block rewards, Lunul operates on a fee-only economic model. Validators process transactions exclusively for explicit public fees attached to the ZK balance relation:
-        </p>
-        <p class="font-mono-code bg-purple-950/40 p-3 rounded-xl border border-purple-500/30 text-purple-300 text-center">
-          <code>Fee = &sum; Inputs<sub>value</sub> - &sum; Outputs<sub>value</sub></code>
-        </p>
-        <p>This design guarantees long-term economic sustainability without coin dilution.</p>
-      </section>
-
-      <!-- Section 4 -->
-      <section id="tokenomics">
-        <h2><i class="fa-solid fa-coins text-purple-400"></i> 4. Genesis Block, Tokenomics & Supply</h2>
-        <p>The native utility and governance token of the Lunul ecosystem is <strong>LUN</strong>.</p>
-
-        <h3>4.1 Token Supply & Distribution</h3>
-        <p><strong>Total Fixed Supply:</strong> 1,000,000,000 (1 Billion) LUN.</p>
-
-        <div class="table-container">
-          <table>
-            <thead>
+        <!-- TABLE -->
+        <div class="overflow-x-auto font-mono-code text-xs">
+          <table class="w-full text-left text-slate-300 border border-white/10 rounded-2xl overflow-hidden">
+            <thead class="bg-black/80 text-slate-400 uppercase text-[10px]">
               <tr>
-                <th>Category</th>
-                <th>Percentage</th>
-                <th>Amount (LUN)</th>
-                <th>Purpose & Vesting</th>
+                <th class="p-3">Category</th>
+                <th class="p-3">Percentage</th>
+                <th class="p-3">Amount (LUN)</th>
+                <th class="p-3 rounded-r-xl">Purpose & Vesting</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody class="divide-y divide-white/5 bg-zinc-950/40">
               <tr>
-                <td>Community Rewards</td>
-                <td>10%</td>
-                <td>100,000,000</td>
-                <td>Staking rewards, developer grants, and ecosystem airdrops.</td>
+                <td class="p-3 font-bold text-white">Community Rewards</td>
+                <td class="p-3 text-purple-400">10%</td>
+                <td class="p-3">100,000,000</td>
+                <td class="p-3 text-slate-400">Staking rewards, developer grants, and ecosystem airdrops.</td>
               </tr>
               <tr>
-                <td>Ecosystem Incentives</td>
-                <td>10%</td>
-                <td>100,000,000</td>
-                <td>Fostering privacy-first dApps and partner integrations.</td>
+                <td class="p-3 font-bold text-white">Ecosystem Incentives</td>
+                <td class="p-3 text-purple-400">10%</td>
+                <td class="p-3">100,000,000</td>
+                <td class="p-3 text-slate-400">Fostering privacy-first dApps and partner integrations.</td>
               </tr>
               <tr>
-                <td>Validator Rewards</td>
-                <td>10%</td>
-                <td>100,000,000</td>
-                <td>Unlocked linearly over the first 3 years to secure consensus.</td>
+                <td class="p-3 font-bold text-white">Validator Rewards</td>
+                <td class="p-3 text-purple-400">10%</td>
+                <td class="p-3">100,000,000</td>
+                <td class="p-3 text-slate-400">Unlocked linearly over the first 3 years to secure consensus.</td>
               </tr>
               <tr>
-                <td>Investors (Seed)</td>
-                <td>10%</td>
-                <td>100,000,000</td>
-                <td>Issued at $0.05 ($5M raised); 25% at launch, 2-year linear vesting.</td>
+                <td class="p-3 font-bold text-white">Investors (Seed)</td>
+                <td class="p-3 text-purple-400">10%</td>
+                <td class="p-3">100,000,000</td>
+                <td class="p-3 text-slate-400">Issued at $0.05 ($5M raised); 25% at launch, 2-year linear vesting.</td>
               </tr>
               <tr>
-                <td>Team and Advisors</td>
-                <td>10%</td>
-                <td>100,000,000</td>
-                <td>Core engineering and strategic advisory alignment.</td>
+                <td class="p-3 font-bold text-white">Team and Advisors</td>
+                <td class="p-3 text-purple-400">10%</td>
+                <td class="p-3">100,000,000</td>
+                <td class="p-3 text-slate-400">Core engineering and strategic advisory alignment.</td>
               </tr>
               <tr>
-                <td>Marketing & Partnerships</td>
-                <td>10%</td>
-                <td>100,000,000</td>
-                <td>Exchange liquidity, brand visibility, and adoption campaigns.</td>
+                <td class="p-3 font-bold text-white">Marketing & Partnerships</td>
+                <td class="p-3 text-purple-400">10%</td>
+                <td class="p-3">100,000,000</td>
+                <td class="p-3 text-slate-400">Exchange liquidity, brand visibility, and adoption campaigns.</td>
               </tr>
               <tr>
-                <td>Reserve Fund</td>
-                <td>5%</td>
-                <td>50,000,000</td>
-                <td>Emergency capital buffer and strategic treasury allocation.</td>
+                <td class="p-3 font-bold text-white">Reserve Fund</td>
+                <td class="p-3 text-purple-400">5%</td>
+                <td class="p-3">50,000,000</td>
+                <td class="p-3 text-slate-400">Emergency capital buffer and strategic treasury allocation.</td>
               </tr>
               <tr>
-                <td>Liquidity & Market Ops</td>
-                <td>35%</td>
-                <td>350,000,000</td>
-                <td>DEX pools and market-making stability.</td>
+                <td class="p-3 font-bold text-white">Liquidity & Market Ops</td>
+                <td class="p-3 text-purple-400">35%</td>
+                <td class="p-3">350,000,000</td>
+                <td class="p-3 text-slate-400">DEX pools and market-making stability.</td>
               </tr>
-              <tr>
-                <td><strong>Total</strong></td>
-                <td><strong>100%</strong></td>
-                <td><strong>1,000,000,000</strong></td>
-                <td><strong>Fully defined genesis allocation.</strong></td>
+              <tr class="bg-purple-950/20 font-bold">
+                <td class="p-3 text-white">Total</td>
+                <td class="p-3 text-purple-400">100%</td>
+                <td class="p-3 text-white">1,000,000,000</td>
+                <td class="p-3 text-purple-300">Fully defined genesis allocation.</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <h3>4.2 Deflationary Burn Mechanism</h3>
+        <div class="bg-black/40 border border-white/5 rounded-2xl p-6 space-y-2">
+          <h4 class="font-bold text-white font-mono-code text-sm">4.2 Deflationary Burn Mechanism</h4>
+          <p class="text-xs text-slate-400">To counteract circulation expansion, 10% of all transaction and bridge fees are permanently burned, while dynamic fee adjustments maintain network accessibility.</p>
+        </div>
+      </section>
+
+      <hr class="border-white/10">
+
+      <!-- SECTION 5 & 6 -->
+      <section id="crosschain" class="space-y-4">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-white font-mono-code flex items-center space-x-3">
+          <span class="text-purple-400">5.</span>
+          <span>Cross-Chain Bridge & Recursive Proof Aggregation</span>
+        </h2>
         <p>
-          To counteract circulation expansion, 10% of all transaction and bridge fees are permanently burned, while dynamic fee adjustments maintain network accessibility.
+          Verifying individual transaction proofs across heterogeneous consensus layers incurs prohibitive gas costs. Lunul resolves this by implementing recursive proof aggregation and decentralized light client relays, compressing thousands of state transitions into a constant-size cryptographic proof verified in $O(1)$ time.
         </p>
       </section>
 
-      <!-- Section 5 (Newly Replaced: Cross-Chain Bridge & Recursive Proof Aggregation) -->
-      <section id="bridge">
-        <h2><i class="fa-solid fa-bridge text-cyan-400"></i> 5. Cross-Chain Bridge & Recursive Proof Aggregation</h2>
+      <section id="conclusion" class="space-y-4 pt-4">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-white font-mono-code flex items-center space-x-3">
+          <span class="text-purple-400">7.</span>
+          <span>Conclusion</span>
+        </h2>
         <p>
-          To ensure Lunul does not operate as an isolated silo, Null Net incorporates a trust-minimized, zero-knowledge cross-chain interoperability layer. This mechanism allows users to deposit assets from external layer-1 and layer-2 networks into Lunul's private state, execute confidential transactions, and withdraw securely without exposing transfer graphs to public explorers.
-        </p>
-
-        <h3>5.1 Recursive zk-SNARK Proof Aggregation</h3>
-        <p>
-          Verifying individual transaction proofs across heterogeneous consensus layers incurs prohibitive gas costs and high latency. Lunul resolves this by implementing recursive proof aggregation. Individual transaction proofs <code>&pi;<sub>1</sub>, &pi;<sub>2</sub>, ..., &pi;<sub>n</sub></code> generated in a batch are folded into a single concise aggregate proof <code>&Pi;<sub>agg</sub></code> using incremental multiscalar multiplication (MSM) reduction algorithms.
-        </p>
-        <p class="font-mono-code bg-purple-950/40 p-3 rounded-xl border border-purple-500/30 text-purple-300 text-center">
-          <code>Verify(VK<sub>agg</sub>, &Pi;<sub>agg</sub>, {PublicInputs}) = True</code>
-        </p>
-        <p>
-          This recursive pipeline compresses thousands of state transitions into a constant-size cryptographic proof that can be verified in O(1) time by destination smart contracts on external chains.
-        </p>
-
-        <h3>5.2 Decentralized Light Client Relay</h3>
-        <p>
-          External chain state is monitored and relayed via decentralized BFT validator committees running stateless light client verification circuits. 
-        </p>
-        <ul>
-          <li><strong>Lock-and-Mint / Burn-and-Release:</strong> Assets locked in external bridge contracts generate cryptographic inclusion receipts.</li>
-          <li><strong>Fraud & Validity Proving:</strong> Bridge withdrawal requests require a valid nullifier generation proof, preventing double-withdrawals across interconnected chains.</li>
-          <li><strong>Asynchronous Finality Anchoring:</strong> Bridge transfers settle on Lunul once the underlying BFT epoch achieves finality, eliminating probabilistic reorg risks.</li>
-        </ul>
-      </section>
-
-      <!-- Section 6 -->
-      <section id="governance">
-        <h2><i class="fa-solid fa-landmark text-indigo-400"></i> 6. Governance Model</h2>
-        <p>Governance over protocol upgrades, fee parameters, and treasury allocation is managed via Quadratic Voting by LUN token holders.</p>
-        <ul>
-          <li><strong>Proposal Submission:</strong> Requires staking a minimum threshold of LUN.</li>
-          <li><strong>Voting Period:</strong> Active for 14 days with a mandatory 25% quorum participation.</li>
-          <li><strong>Quadratic Weighting:</strong> Voting power <code>VP</code> is calculated as <code>VP = &radic;(Tokens Staked)</code>, preventing plutocratic capture while giving voice to smaller community stakeholders.</li>
-        </ul>
-      </section>
-
-      <!-- Section 7 -->
-      <section id="conclusion">
-        <h2><i class="fa-solid fa-flag-checkered text-purple-400"></i> 7. Conclusion</h2>
-        <p>
-          Lunul Null Net successfully bridges the gap between ultra-high performance and uncompromising privacy. By marrying parallelized execution, Groth16 ZK-SNARKs, Pedersen commitments, and a deflationary fee-only BFT model, Lunul provides a robust foundation for the next generation of private decentralized applications, enterprise finance, and cross-chain settlements.
+          Lunul Null Net successfully bridges the gap between EVM performance and uncompromising privacy. By marrying parallelized EVM compatibility, Groth16 ZK-SNARKs, Pedersen commitments, and a deflationary fee-only BFT model, Lunul provides a robust foundation for corporate finance and private decentralized applications.
         </p>
       </section>
 
     </div>
 
-    <!-- Bottom Actions -->
-    <div class="mt-8 flex flex-wrap justify-between items-center gap-4 cardBg p-6 rounded-2xl border border-white/10 font-mono-code text-xs">
-      <div class="flex items-center gap-3 text-slate-300">
-        <i class="fa-solid fa-file-pdf text-purple-400 text-lg"></i>
-        <span>Download official PDF version from <a href="https://whitepaper.lunul.org" target="_blank" class="text-purple-400 underline">whitepaper.lunul.org</a></span>
+    <!-- FOOTER CTA BANNER -->
+    <div class="relative overflow-hidden rounded-3xl bg-zinc-950/65 backdrop-blur-xl border border-white/10 p-8 text-center space-y-4 font-mono-code">
+      <div class="text-sm font-bold text-white">Ready to Build on Null Net?</div>
+      <div class="flex flex-wrap justify-center gap-4 pt-2 text-xs">
+        <a href="presale.html" class="bg-purple-600 hover:bg-purple-500 text-white font-bold py-3 px-6 rounded-xl transition shadow-lg shadow-purple-500/20">Launch Portal App</a>
+        <a href="https://docs.lunul.org" target="_blank" class="bg-zinc-900 hover:bg-zinc-800 text-slate-200 border border-white/10 font-bold py-3 px-6 rounded-xl transition">Explore Documentation</a>
       </div>
-      <a href="mailto:investors@lunul.org" class="btn-lunul px-6 py-3 rounded-xl text-white font-bold flex items-center gap-2">
-        <i class="fa-solid fa-envelope"></i> Contact Engineering Team
-      </a>
     </div>
 
   </main>
 
-  <!-- Shared Footer -->
-  <footer class="w-full max-w-7xl mx-auto px-4 sm:px-6 py-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono-code text-slate-500">
-    <div>&copy; 2026 Lunul Foundation (LF). All rights reserved.</div>
-    <div class="flex items-center gap-6">
-      <a href="https://lunul.org" target="_blank" class="hover:text-white transition">Ecosystem</a>
-      <a href="https://app.lunul.org" target="_blank" class="hover:text-white transition">DEX Portal</a>
-      <a href="https://docs.lunul.org" target="_blank" class="hover:text-white transition">Documentation</a>
-      <a href="https://whitepaper.lunul.org" target="_blank" class="text-white transition font-bold">Whitepaper</a>
+  <!-- FOOTER -->
+  <footer class="border-t border-white/15 py-8 text-center text-xs text-slate-500 font-mono-code">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>&copy; 2026 Lunul Foundation (LF). All rights reserved.</div>
+      <div class="flex items-center space-x-6">
+        <a href="https://docs.lunul.org" target="_blank" class="hover:text-white transition">Documentation</a>
+        <a href="whitepaper.html" class="hover:text-white transition">Whitepaper</a>
+        <a href="presale.html" class="hover:text-white transition">DEX Portal</a>
+      </div>
     </div>
   </footer>
 
+  <script>
+    function toggleMobileMenu() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+  </script>
 </body>
 </html>
