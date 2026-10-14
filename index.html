@@ -1,337 +1,153 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lunul Foundation | Technical Whitepaper & Protocol Specification</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { purple: { 400: '#c084fc', 500: '#a855f7', 600: '#9333ea' } } } } }
-  </script>
+  <meta name="theme-color" content="#08090d">
+  <meta name="description" content="Lunul is building practical financial privacy for individuals and businesses through NullNet and Terminull.">
+  <title>Lunul — Privacy is normal. Your finances should be, too.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
-    body { font-family: 'Inter', sans-serif; }
-    .font-mono-code { font-family: 'JetBrains Mono', monospace; }
-    html { scroll-behavior: smooth; }
+    :root{--bg:#08090d;--panel:#101219;--panel2:#131620;--line:rgba(255,255,255,.09);--text:#f5f6fa;--muted:#a3a8b8;--purple:#a78bfa;--purple2:#7c3aed;--mint:#7de5c1;--max:1160px;--radius:24px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(ellipse at 78% 0%,rgba(124,58,237,.12),transparent 35%),radial-gradient(ellipse at 0% 38%,rgba(16,185,129,.045),transparent 28%)}a{color:inherit;text-decoration:none}button{font:inherit}.wrap{width:min(var(--max),calc(100% - 48px));margin-inline:auto}.eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--purple);font-size:.74rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase}.eyebrow:before{content:"";width:18px;height:1px;background:currentColor}.section{padding:104px 0}.section-head{max-width:720px;margin-bottom:38px}.section-head.center{text-align:center;margin-inline:auto}.section-head.center .eyebrow:before{display:none}.section-head h2{font:700 clamp(2rem,4vw,3.15rem)/1.12 Manrope,sans-serif;letter-spacing:-.045em;margin:16px 0}.section-head p{color:var(--muted);font-size:1.05rem;margin:0}.gradient-text{background:linear-gradient(110deg,#fff 8%,#d9ccff 57%,#a78bfa 100%);-webkit-background-clip:text;background-clip:text;color:transparent}.topbar{height:78px;position:sticky;top:0;z-index:50;background:rgba(8,9,13,.82);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}.nav{height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{font:800 1.75rem/1 Manrope,sans-serif;letter-spacing:-.075em}.brand span{color:var(--purple)}.navlinks{display:flex;align-items:center;gap:27px;color:#b8bbca;font-size:.88rem}.navlinks a:hover,.footer a:hover{color:#fff}.nav-cta,.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:12px;padding:12px 18px;font-weight:700;font-size:.88rem;transition:transform .2s,background .2s,border-color .2s}.nav-cta,.btn-primary{background:#8b5cf6;color:#fff;box-shadow:0 8px 28px rgba(124,58,237,.22)}.nav-cta:hover,.btn-primary:hover{background:#9b75fa;transform:translateY(-2px)}.btn-secondary{border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.035);color:#f3f3f8}.btn-secondary:hover{border-color:rgba(167,139,250,.55);background:rgba(167,139,250,.08);transform:translateY(-2px)}.menu-toggle{display:none;border:1px solid var(--line);background:transparent;color:white;border-radius:10px;padding:8px 11px;font-size:1.2rem}.hero{padding:90px 0 74px;position:relative;overflow:hidden}.hero-grid{display:grid;grid-template-columns:1.06fr .94fr;align-items:center;gap:55px}.hero-copy .eyebrow{padding:8px 12px;border:1px solid rgba(167,139,250,.24);background:rgba(167,139,250,.07);border-radius:100px;letter-spacing:.12em}.hero-copy .eyebrow:before{width:6px;height:6px;border-radius:50%;background:var(--mint)}h1,h2,h3,h4{font-family:Manrope,sans-serif}h1{font-size:clamp(3.1rem,6.3vw,5.8rem);line-height:.99;letter-spacing:-.075em;margin:27px 0 23px;max-width:760px}h1 .second{display:block;color:#bca7ff}.hero-lede{font-size:1.16rem;line-height:1.75;color:#c1c4d0;max-width:610px}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}.microcopy{font-size:.8rem;color:#83899b;margin-top:18px}.hero-art{min-height:430px;position:relative;display:grid;place-items:center}.orb{position:absolute;width:390px;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 38% 32%,rgba(167,139,250,.28),rgba(124,58,237,.09) 35%,rgba(8,9,13,0) 70%);filter:blur(4px)}.orbit{position:absolute;width:330px;height:330px;border:1px solid rgba(167,139,250,.24);border-radius:50%;transform:rotate(-25deg) scaleY(.58)}.orbit.two{width:430px;height:430px;transform:rotate(52deg) scaleY(.54);border-color:rgba(125,229,193,.18)}.privacy-core{position:relative;width:210px;height:240px;display:grid;place-items:center;filter:drop-shadow(0 25px 60px rgba(124,58,237,.25))}.shield{width:160px;height:180px;clip-path:polygon(50% 0,94% 17%,88% 65%,72% 84%,50% 100%,28% 84%,12% 65%,6% 17%);background:linear-gradient(145deg,rgba(197,181,253,.96),rgba(124,58,237,.82) 48%,rgba(33,22,61,.96));display:grid;place-items:center;position:relative}.shield:after{content:"";position:absolute;inset:2px;clip-path:inherit;background:linear-gradient(145deg,#1a1628,#0b0c12 70%)}.shield svg{position:relative;z-index:1;width:58px;height:58px;color:#d8ccff}.float-card{position:absolute;z-index:3;display:flex;align-items:center;gap:11px;padding:13px 16px;background:rgba(17,19,28,.88);border:1px solid rgba(255,255,255,.12);box-shadow:0 15px 40px rgba(0,0,0,.25);border-radius:15px;backdrop-filter:blur(15px);font-size:.83rem}.float-card small{display:block;color:#9298aa;font-size:.7rem}.float-icon{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:rgba(167,139,250,.13);color:#c4b5fd}.card-one{top:63px;left:0}.card-two{bottom:61px;right:-4px}.status-dot{display:inline-block;width:7px;height:7px;background:var(--mint);border-radius:50%;margin-right:5px}.trust-strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(255,255,255,.018)}.trust-inner{display:flex;justify-content:space-between;align-items:center;gap:22px;padding:21px 0;flex-wrap:wrap}.trust-label{font-size:.76rem;color:#82889a;text-transform:uppercase;letter-spacing:.12em}.trust-item{color:#c7cad5;font-weight:600;font-size:.9rem}.trust-item span{color:var(--purple);margin-right:8px}.surface{background:linear-gradient(145deg,rgba(20,22,32,.9),rgba(13,14,20,.88));border:1px solid var(--line);border-radius:var(--radius)}.manifesto{padding:45px;display:grid;grid-template-columns:.85fr 1.15fr;gap:45px;align-items:center;position:relative;overflow:hidden}.manifesto:after{content:"";position:absolute;width:250px;height:250px;right:-100px;top:-130px;background:rgba(124,58,237,.18);filter:blur(70px);pointer-events:none}.manifesto h2{font-size:clamp(2rem,3.5vw,3rem);line-height:1.1;letter-spacing:-.05em;margin:15px 0 0}.manifesto-copy p{color:#b4b8c6;margin:0 0 15px}.manifesto-copy p:last-child{margin:0}.manifesto-copy strong{color:white}.products{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.product-card{padding:32px;position:relative;overflow:hidden;min-height:390px;display:flex;flex-direction:column}.product-card:before{content:"";position:absolute;width:210px;height:210px;right:-80px;top:-90px;background:rgba(124,58,237,.12);filter:blur(50px)}.product-top{display:flex;align-items:center;justify-content:space-between;gap:14px}.product-symbol{width:48px;height:48px;border-radius:15px;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.22);display:grid;place-items:center;color:#c4b5fd}.product-symbol svg{width:24px;height:24px}.tag{font-size:.7rem;color:var(--purple);text-transform:uppercase;letter-spacing:.1em;font-weight:700}.product-card h3{font-size:1.8rem;letter-spacing:-.04em;margin:22px 0 12px}.product-card p{color:var(--muted);margin:0 0 18px}.product-card ul{list-style:none;padding:0;margin:4px 0 26px;display:grid;gap:10px;color:#c9cbd5;font-size:.9rem}.product-card li:before{content:"↗";color:var(--mint);margin-right:10px}.product-card .btn{margin-top:auto;align-self:flex-start}.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.why-card{padding:24px 22px;border-radius:19px;background:rgba(255,255,255,.025);border:1px solid var(--line);transition:transform .2s,border-color .2s}.why-card:hover{transform:translateY(-4px);border-color:rgba(167,139,250,.38)}.why-icon{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;color:#c4b5fd;background:rgba(167,139,250,.1);margin-bottom:22px}.why-icon svg{width:21px;height:21px}.why-card h3{font-size:1.08rem;line-height:1.35;margin:0 0 10px}.why-card p{font-size:.9rem;color:var(--muted);margin:0}.architecture{display:grid;grid-template-columns:.8fr 1.2fr;gap:55px;align-items:center;padding:45px}.architecture h2{font-size:clamp(2rem,3.5vw,3rem);line-height:1.1;letter-spacing:-.05em;margin:14px 0}.architecture p{color:var(--muted)}.layer-stack{display:grid;gap:12px}.layer{display:flex;gap:18px;align-items:center;padding:21px;border-radius:17px;border:1px solid var(--line);background:rgba(255,255,255,.025)}.layer-num{font:700 .75rem 'DM Sans',sans-serif;color:var(--purple);background:rgba(167,139,250,.1);width:38px;height:38px;border-radius:12px;display:grid;place-items:center;flex-shrink:0}.layer h3{font-size:1rem;margin:0 0 3px}.layer p{font-size:.84rem;margin:0}.layer-connector{text-align:center;color:#686e80;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase}.audience-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.audience{padding:26px;border:1px solid var(--line);background:rgba(255,255,255,.022);border-radius:20px}.audience .mini{font-size:.75rem;color:var(--mint);letter-spacing:.1em;text-transform:uppercase;font-weight:700}.audience h3{font-size:1.15rem;margin:12px 0 8px}.audience p{font-size:.9rem;color:var(--muted);margin:0}.case-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.case{padding:28px;position:relative;overflow:hidden}.case-head{display:flex;align-items:center;gap:12px;margin-bottom:20px}.case-number{font:700 .75rem 'DM Sans',sans-serif;color:var(--purple);background:rgba(167,139,250,.1);padding:7px 9px;border-radius:8px}.case h3{font-size:1.28rem;margin:0}.case-block{margin:17px 0}.case-block strong{display:block;color:#f1f1f7;font-size:.88rem;margin-bottom:4px}.case-block p{color:var(--muted);font-size:.9rem;margin:0}.outcome{margin-top:22px;padding-top:17px;border-top:1px solid var(--line);color:#bcebdc;font-size:.86rem}.outcome strong{color:var(--mint)}.illustrative{display:inline-block;margin-top:14px;color:#858b9c;font-size:.75rem}.principles{display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center;padding:44px;background:linear-gradient(120deg,rgba(124,58,237,.12),rgba(16,185,129,.035) 75%);border:1px solid rgba(167,139,250,.2);border-radius:var(--radius)}.principles h2{font-size:clamp(2rem,3.7vw,3.3rem);line-height:1.1;letter-spacing:-.05em;margin:15px 0}.principles p{color:#b8bdcb}.principle-points{display:grid;gap:14px}.principle-point{display:flex;gap:13px;padding:15px;border:1px solid var(--line);background:rgba(8,9,13,.45);border-radius:15px}.check{color:var(--mint);font-size:1.1rem}.principle-point strong{display:block;font-size:.94rem}.principle-point span{display:block;color:var(--muted);font-size:.83rem;margin-top:3px}.tech-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.tech{padding:22px;border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.022)}.tech small{font-size:.72rem;color:var(--purple);font-weight:700;text-transform:uppercase;letter-spacing:.1em}.tech h3{font-size:1rem;margin:12px 0 8px}.tech p{font-size:.84rem;color:var(--muted);margin:0}.faq-list{display:grid;gap:10px}.faq-item{border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.022);overflow:hidden}.faq-item summary{cursor:pointer;list-style:none;padding:20px 22px;display:flex;justify-content:space-between;align-items:center;gap:20px;font-weight:700;font-size:.96rem}.faq-item summary::-webkit-details-marker{display:none}.faq-item summary:after{content:"+";color:var(--purple);font-size:1.35rem;font-weight:400}.faq-item[open] summary:after{content:"−"}.faq-answer{padding:0 22px 21px;color:var(--muted);font-size:.91rem;max-width:900px}.final-cta{text-align:center;padding:65px 28px;border:1px solid rgba(167,139,250,.2);border-radius:28px;background:radial-gradient(ellipse at 50% 0%,rgba(124,58,237,.18),transparent 65%),#101119}.final-cta h2{font-size:clamp(2.2rem,4.7vw,4rem);letter-spacing:-.06em;line-height:1.06;margin:15px 0}.final-cta p{color:var(--muted);max-width:620px;margin:0 auto 26px}.final-cta .hero-actions{justify-content:center;margin-top:24px}.footer{border-top:1px solid var(--line);padding:30px 0;color:#858b9c;font-size:.82rem}.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}.footer-links{display:flex;gap:20px;flex-wrap:wrap}.footer-brand{font:800 1.35rem Manrope,sans-serif;letter-spacing:-.07em;color:white}.footer-brand span{color:var(--purple)}.footer-note{font-size:.75rem;max-width:580px;margin-top:8px;color:#717789}
+    @media(max-width:960px){.products{grid-template-columns:repeat(2,minmax(0,1fr))}.navlinks{gap:15px}.hero-grid{gap:22px}.hero-art{transform:scale(.9)}.why-grid,.tech-grid{grid-template-columns:repeat(2,1fr)}.architecture{gap:28px}.manifesto{gap:25px}.audience-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:720px){.wrap{width:min(var(--max),calc(100% - 32px))}.section{padding:72px 0}.topbar{height:68px}.menu-toggle{display:block}.nav-cta{display:none}.navlinks{display:none;position:absolute;top:67px;left:0;right:0;padding:18px 20px 22px;background:rgba(8,9,13,.98);border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:4px}.navlinks.open{display:flex}.navlinks a{padding:10px 6px}.hero{padding:60px 0 48px}.hero-grid{grid-template-columns:1fr;gap:10px}.hero-copy{text-align:center}.hero-copy .eyebrow{margin:auto}.hero-copy h1{font-size:clamp(3rem,12vw,4.6rem)}.hero-lede{font-size:1.03rem}.hero-actions{justify-content:center}.hero-art{min-height:340px;transform:scale(.82);margin:-10px 0 -28px}.card-one{left:-3px}.card-two{right:-8px}.trust-inner{justify-content:center;text-align:center;gap:12px 22px}.trust-label{width:100%}.manifesto,.architecture,.principles{grid-template-columns:1fr;padding:28px}.products{grid-template-columns:1fr}.product-card{min-height:0;padding:26px}.why-grid{grid-template-columns:1fr 1fr}.audience-grid{grid-template-columns:1fr 1fr}.case-grid{grid-template-columns:1fr}.section-head{margin-bottom:27px}.section-head h2{font-size:2.25rem}.final-cta{padding:48px 22px}}
+    @media(max-width:440px){.why-grid,.tech-grid,.audience-grid{grid-template-columns:1fr}.hero-actions .btn{width:100%}.hero-art{margin-inline:-25px;transform:scale(.72);min-height:300px}.card-one{left:0}.card-two{right:0}.trust-item{font-size:.8rem}.manifesto{padding:24px}.architecture{padding:24px}.principles{padding:24px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
   </style>
 </head>
-<body class="bg-black text-slate-100 min-h-screen selection:bg-purple-500 selection:text-white flex flex-col justify-between overflow-x-hidden">
-
-  <!-- GLOBAL HEADER NAVIGATION -->
-    <header class="border-b border-white/10 bg-black/90 backdrop-blur sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-      <div class="flex items-center space-x-6">  
-  <a href="https://lunul.org" class="inline-flex items-center">
-      <span class="font-extrabold tracking-tight text-gradient text-2xl sm:text-3xl">lunul labs</span>
-    </a>
-
-        <!-- DESKTOP NAV -->
-        <nav class="hidden lg:flex items-center space-x-1 font-mono-code text-xs">
-          <a href="https://lunul.org/index.html#architecture" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Architecture</a>
-          <a href="https://lunul.org/index.html#use-cases" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Ecosystem & Use Cases</a>
-          <a href="https://docs.lunul.org" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Docs</a>
-          <a href="https://whitepaper.lunul.org" class="px-3 py-2 rounded-lg bg-white/10 text-white font-bold transition">Whitepaper</a>
-          <a href="https://portal.lunul.org" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Portal</a>
-        </nav>
-      </div>
-
-      <div class="flex items-center space-x-3 font-mono-code text-xs">
-        <a href="https://portal.lunul.org/creator.html" class="bg-purple-600 hover:bg-purple-500 text-white font-bold py-2 px-4 rounded-xl transition shadow-lg shadow-purple-500/20 flex items-center space-x-2">
-          <span>Launch App 🚀</span>
-        </a>
-        
-        <!-- MOBILE BURGER TOGGLE BUTTON -->
-        <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-slate-300 hover:text-white focus:outline-none cursor-pointer">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
-      </div>
-    </div>
-
-    <!-- MOBILE DROPDOWN MENU -->
-    <div id="mobile-menu" class="hidden lg:hidden bg-zinc-950 border-b border-white/10 px-6 py-4 space-y-2 font-mono-code text-xs">
-      <a href="https://lunul.org/index.html#architecture" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition">Architecture</a>
-      <a href="https://lunul.org/index.html#use-cases" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition">Ecosystem & Use Cases</a>
-      <a href="https://docs.lunul.org" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition">Docs</a>
-      <a href="https://whitepaper.lunul.org" class="block px-3 py-2 rounded-lg bg-white/10 text-white font-bold transition">Whitepaper</a>
-      <a href="https://portal.lunul.org" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition">Portal</a>
+<body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="https://lunul.org" aria-label="Lunul home">lunul<span>.</span></a>
+      <nav class="navlinks" id="navlinks" aria-label="Main navigation">
+        <a href="#why">Why privacy</a><a href="#products">Our ecosystem</a><a href="#use-cases">Use cases</a><a href="#technology">Technology</a><a href="#faq">FAQ</a><a href="" target="_blank" rel="noopener noreferrer">Portall ↗</a><a href="https://docs.lunul.org" target="_blank" rel="noopener noreferrer">Docs ↗</a><a href="https://whitepaper.lunul.org" target="_blank" rel="noopener noreferrer">Whitepaper ↗</a>
+      </nav>
+      <a class="nav-cta" href="" target="_blank" rel="noopener noreferrer">Launch Portall <span aria-hidden="true">↗</span></a>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="navlinks">☰</button>
     </div>
   </header>
 
-  <!-- WHITEPAPER CONTAINER -->
-  <main class="max-w-5xl mx-auto px-6 py-16 space-y-12 flex-1 w-full">
-    
-    <!-- HERO HEADER -->
-    <div class="relative overflow-hidden rounded-3xl bg-zinc-950/80 backdrop-blur-xl border border-white/10 p-8 sm:p-14 text-center space-y-6 shadow-2xl shadow-purple-500/10">
-      <div class="absolute -right-20 -top-20 w-80 h-80 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
-      <div class="absolute -left-20 -bottom-20 w-80 h-80 bg-indigo-600/15 rounded-full blur-3xl pointer-events-none"></div>
-
-      <div class="relative z-10 space-y-4 max-w-3xl mx-auto font-mono-code">
-        <div class="flex items-center justify-center space-x-3">
-          <span class="flex h-3 w-3 relative">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-          </span>
-          <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest bg-emerald-500/10 border border-emerald-500/30 px-4 py-1.5 rounded-full inline-block">
-            NULLNET PROTOCOL SPECIFICATION v2.4 // CHAIN ID: 448000
-          </span>
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Financial privacy, made practical</div>
+          <h1>Privacy is normal.<span class="second">Your finances should be, too.</span></h1>
+          <p class="hero-lede">Your wallet shouldn't be a public record of your life. Your company's payroll shouldn't be a competitor's research tool. Your money deserves a little more discretion.</p>
+          <p class="hero-lede">Lunul is building financial privacy for the blockchain era—with <strong>NullNet</strong> and <strong>Terminull</strong>.</p>
+          <div class="hero-actions"><a class="btn btn-primary" href="https://terminull.lunul.org">Explore Terminull <span>↗</span></a><a class="btn btn-secondary" href="#products">Discover the ecosystem <span>↓</span></a></div>
+          <div class="microcopy">For individuals, teams and businesses. Privacy with principles.</div>
         </div>
-
-        <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
-          LUNUL (LUN) • TECHNICAL WHITEPAPER
-        </h1>
-        <p class="text-sm sm:text-base text-slate-300 font-sans leading-relaxed">
-          An Institutional-Grade, Fee-Only, Zero-Knowledge Private EVM Architecture with Sub-Second BFT Finality and Wallet VPN Tunneling
-        </p>
-        <div class="text-xs text-slate-500 pt-2 flex flex-wrap justify-center gap-4">
-          <span>Published by the Lunul Foundation (LF)</span>
-          <span>&bull;</span>
-          <span>Corporate Privacy-as-a-Service</span>
+        <div class="hero-art" aria-label="Abstract shield representing financial privacy">
+          <div class="orb"></div><div class="orbit"></div><div class="orbit two"></div>
+          <div class="privacy-core"><div class="shield"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14v2"/></svg></div></div>
+          <div class="float-card card-one"><div class="float-icon">◇</div><div><strong>Private by design</strong><small>Less public exposure</small></div></div>
+          <div class="float-card card-two"><div class="float-icon">✓</div><div><strong><span class="status-dot"></span>Privacy with principles</strong><small>Discretion. Responsibility.</small></div></div>
         </div>
       </div>
+    </section>
 
-      <!-- JUMP LINKS BAR -->
-      <div class="relative z-10 flex flex-wrap items-center justify-center gap-3 pt-6 font-mono-code text-xs">
-        <a href="#abstract" class="bg-zinc-900 hover:bg-zinc-800 text-slate-300 border border-white/10 py-2 px-4 rounded-xl transition">Abstract</a>
-        <a href="#introduction" class="bg-zinc-900 hover:bg-zinc-800 text-slate-300 border border-white/10 py-2 px-4 rounded-xl transition">1. Background</a>
-        <a href="#cryptography" class="bg-zinc-900 hover:bg-zinc-800 text-slate-300 border border-white/10 py-2 px-4 rounded-xl transition">2. Cryptography</a>
-        <a href="#consensus" class="bg-zinc-900 hover:bg-zinc-800 text-slate-300 border border-white/10 py-2 px-4 rounded-xl transition">3. Consensus & Gas</a>
-        <a href="#tokenomics" class="bg-zinc-900 hover:bg-zinc-800 text-slate-300 border border-white/10 py-2 px-4 rounded-xl transition">4. Tokenomics</a>
+    <div class="trust-strip"><div class="wrap trust-inner"><div class="trust-label">One ecosystem. A practical purpose.</div><div class="trust-item"><span>01</span> NullNet privacy infrastructure</div><div class="trust-item"><span>02</span> Terminull financial suite</div><div class="trust-item"><span>03</span> Built around discretion</div></div></div>
+
+    <section class="section" id="why"><div class="wrap">
+      <div class="surface manifesto"><div><div class="eyebrow">A simple principle</div><h2>Privacy isn't suspicious.<br><span class="gradient-text">It's sensible.</span></h2></div><div class="manifesto-copy"><p>You don't publish your bank statements on social media. You don't hand competitors a breakdown of your payroll. You don't expect strangers to know what you earn, spend or who you pay.</p><p>Public blockchains bring powerful possibilities—but transparency can expose more than you intended. Once a wallet is linked to a person or business, its activity may reveal balances, relationships and patterns.</p><p><strong>Keep the benefits of blockchain. Add a layer of financial discretion.</strong></p></div></div>
+    </div></section>
+
+    <section class="section" id="products" style="padding-top:10px"><div class="wrap">
+      <div class="section-head"><div class="eyebrow">The Lunul ecosystem</div><h2>Privacy underneath.<br><span class="gradient-text">Peace of mind on top.</span></h2><p>One part provides the privacy infrastructure. The other brings practical financial tools into reach.</p></div>
+      <div class="products">
+        <article class="surface product-card"><div class="product-top"><div class="product-symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3 20 7.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="m8 9 4-2 4 2v5l-4 2-4-2V9Z"/></svg></div><span class="tag">Infrastructure · LUN</span></div><h3>NullNet</h3><p>A dedicated privacy layer designed to shield supported financial activity from unnecessary public exposure.</p><p>Think of it as a VPN for your wallet: a familiar way to think about reducing exposure, applied to digital finance. The underlying technology is different, and privacy is not a guarantee of universal anonymity.</p><ul><li>Blockchain-based execution</li><li>Dedicated zero-knowledge environment</li><li>Designed to support Terminull services</li></ul><a class="btn btn-secondary" href="https://docs.lunul.org">Explore the technology ↗</a></article>
+        <article class="surface product-card"><div class="product-top"><div class="product-symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18M7 15h3"/></svg></div><span class="tag">Financial management</span></div><h3>Terminull</h3><p>A private financial management suite designed for people and businesses who want to organise digital money with greater discretion.</p><p>From everyday financial organisation to more structured business workflows, Terminull puts the use case ahead of the jargon.</p><ul><li>Financial accounts and ledgers</li><li>Payroll and business payment workflows</li><li>Escrow, treasury and approval controls</li></ul><a class="btn btn-primary" href="https://terminull.lunul.org">Explore Terminull ↗</a></article>
+        <article class="surface product-card"><div class="product-top"><div class="product-symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M3 9h18M9 21V9"/><path d="m13 14 2 2 4-4"/></svg></div><span class="tag">Ecosystem portal</span></div><h3>Portall</h3><p>The gateway to the Lunul ecosystem—bringing the project's tools and services together in one place.</p><p>A dedicated home for the work behind Lunul, giving visitors a clear place to start exploring the ecosystem.</p><ul><li>Central access point for Lunul</li><li>Connects visitors with ecosystem services</li><li>A natural starting point for exploration</li></ul><a class="btn btn-primary" href="https://portal.lunul.org" target="_blank" rel="noopener noreferrer">Visit Portall ↗</a></article>
       </div>
-    </div>
+      <p class="microcopy">Feature availability depends on implementation and release status. See Terminull for current product details.</p>
+    </div></section>
 
-    <!-- WHITEPAPER CONTENT WRAPPER -->
-    <div class="space-y-12 font-sans text-slate-300 text-sm sm:text-base leading-relaxed bg-zinc-950/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 sm:p-12 shadow-2xl">
-      
-      <!-- ABSTRACT -->
-      <section id="abstract" class="space-y-4">
-        <h2 class="text-xl sm:text-2xl font-extrabold text-white font-mono-code flex items-center space-x-3">
-          <span class="text-purple-400">#</span>
-          <span>Abstract</span>
-        </h2>
-        <p>
-          As decentralized finance and enterprise blockchain adoption mature globally, the inherent tension between public ledger transparency and user financial confidentiality has reached a critical bottleneck. While high-throughput layer-1 networks successfully scale transaction execution, they do so by sacrificing user privacy—exposing account balances, transaction graphs, counterparty relationships, and smart contract execution parameters to MEV sandwich bots, state surveillance algorithms, and commercial intelligence scrapers. Conversely, legacy privacy-centric protocols often compromise throughput, user experience, developer tooling, and programmatic smart contract composability.
-        </p>
-        <p>
-          Lunul (<strong class="text-white">NullNet</strong>) introduces an advanced institutional architecture: an EVM-compatible, high-output, parallelized zero-knowledge transaction protocol backed by a Go-Ethereum (Geth) Clique Byzantine Fault Tolerant (BFT) consensus engine operating on <strong class="text-purple-400">Chain ID 448000</strong>. By anchoring state transitions in Pedersen commitments, Groth16 zk-SNARK circuits, encrypted AES-GCM payloads, and a deterministic spent nullifier database, Lunul achieves complete transactional confidentiality alongside sub-400ms finality and high-frequency execution capacity.
-        </p>
-      </section>
-
-      <hr class="border-white/10">
-
-      <!-- SECTION 1 -->
-      <section id="introduction" class="space-y-4">
-        <h2 class="text-xl sm:text-2xl font-extrabold text-white font-mono-code flex items-center space-x-3">
-          <span class="text-purple-400">1.</span>
-          <span>Introduction & Problem Statement</span>
-        </h2>
-        <p>The modern distributed ledger ecosystem remains polarized between two fundamentally flawed paradigms:</p>
-        <ul class="list-disc pl-6 space-y-2 text-slate-300">
-          <li><strong class="text-white">High-Performance Public Ledgers:</strong> Networks optimized for raw throughput (such as public EVMs and modular rollups) which broadcast all account states, transaction amounts, and token flows in plaintext, exposing corporate treasuries and high-net-worth entities to financial surveillance.</li>
-          <li><strong class="text-white">Anonymity-Centric Privacy Chains:</strong> Protocols that prioritize financial shielding but rely on proprietary virtual machines, exotic domain-specific programming languages, or sluggish proving times that stifle developer adoption.</li>
-        </ul>
-        <p>
-          Lunul reconciles these divergent goals by embedding zero-knowledge proofs directly into a dual-state architecture. Transactions are private by default—concealing sender identities, recipient addresses, and transfer amounts via cryptographic commitments—while maintaining full EVM compatibility and instant BFT settlement.
-        </p>
-        
-        <div class="bg-black/40 border border-white/5 rounded-2xl p-6 space-y-3 font-mono-code text-xs">
-          <div class="text-purple-400 font-bold uppercase tracking-wider">// Core Protocol Objectives</div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-slate-300">
-            <div>• <strong class="text-white">Default Confidentiality:</strong> Obfuscating sender balances and recipient graphs via Pedersen commitments and AES-GCM payload encryption.</div>
-            <div>• <strong class="text-white">Enterprise Scalability:</strong> Achieving over 100,000 TPS through parallelized execution pipelines and optimized Groth16 verification.</div>
-            <div>• <strong class="text-white">Fee-Only Economic Model:</strong> Eliminating inflationary block subsidies in favor of direct public fee extraction and permanent token burns.</div>
-            <div>• <strong class="text-white">Turnkey EVM Tooling:</strong> Enabling developers to deploy standard Solidity contracts targeting the Paris hardfork without modified compilers.</div>
-          </div>
-        </div>
-      </section>
-
-      <hr class="border-white/10">
-
-      <!-- SECTION 2 -->
-      <section id="cryptography" class="space-y-6">
-        <h2 class="text-xl sm:text-2xl font-extrabold text-white font-mono-code flex items-center space-x-3">
-          <span class="text-purple-400">2.</span>
-          <span>Cryptographic and Privacy Layer Architecture</span>
-        </h2>
-
-        <div class="space-y-3">
-          <h3 class="text-lg font-bold text-white font-mono-code">2.1 Pedersen Commitments and Blinding Factors</h3>
-          <p>
-            Within the NullNet shielded pool, unspent transaction outputs (UTXOs) are not recorded as raw plaintext amounts. Instead, they are represented as cryptographic commitments on pairing-friendly elliptic curves:
-          </p>
-          <div class="bg-black/60 border border-purple-500/30 p-4 rounded-xl text-center font-mono-code text-purple-300 text-sm">
-            $$C = r \cdot G + v \cdot H$$
-          </div>
-          <p class="text-xs text-slate-400">Where $v$ represents the raw transfer value, $r$ is a randomly generated 256-bit blinding factor (scalar), and $G$ and $H$ are independent generator points on the BN254 / alt_bn128 elliptic curve.</p>
-        </div>
-
-        <div class="space-y-3 pt-2">
-          <h3 class="text-lg font-bold text-white font-mono-code">2.2 Nullifier Double-Spend Protection</h3>
-          <p>
-            To prevent double-spending without revealing which UTXO is being consumed, Lunul utilizes deterministic nullifiers. When a UTXO at index $i$ is spent, the owner computes a nullifier hash using their secret spending key ($SK$):
-          </p>
-          <div class="bg-black/60 border border-purple-500/30 p-4 rounded-xl text-center font-mono-code text-purple-300 text-sm">
-            $$\text{Nullifier} = \text{Hash}(SK, \text{UTXO\_Index})$$
-          </div>
-          <p class="text-xs text-slate-400">The resulting nullifier hash is published to the global Spent Nullifier Set. If an identical nullifier is submitted twice, the state machine instantly rejects the transaction.</p>
-        </div>
-
-        <div class="space-y-3 pt-2">
-          <h3 class="text-lg font-bold text-white font-mono-code">2.3 Groth16 ZK-SNARK Prover Pipeline</h3>
-          <p>
-            Client-side applications execute arithmetic circuit constraints in WebAssembly (WASM) prior to transaction broadcast. Lunul employs the Groth16 proving system over pairing-friendly curves. Quadratic Arithmetic Programs (QAPs) translate circuit constraints into polynomial relations satisfying $A(x)B(x) - C(x) = H(x)T(x)$, ensuring constant-size proofs verified in $O(1)$ time by validators.
-          </p>
-        </div>
-      </section>
-
-      <hr class="border-white/10">
-
-      <!-- SECTION 3 -->
-      <section id="consensus" class="space-y-4">
-        <h2 class="text-xl sm:text-2xl font-extrabold text-white font-mono-code flex items-center space-x-3">
-          <span class="text-purple-400">3.</span>
-          <span>BFT Consensus, Paris EVM Rules & Fee Economics</span>
-        </h2>
-        <p>
-          NullNet operates a customized <strong class="text-white">Go-Ethereum (Geth) Clique Proof-of-Authority</strong> consensus engine optimized for sub-second finality. Genesis block parameters lock the network to <strong class="text-purple-400 font-mono">Chain ID 448000</strong>, enforcing strict Paris EVM opcode rulesets and prohibiting the <code class="text-red-400 font-mono">PUSH0</code> opcode.
-        </p>
-        <div class="bg-black/40 border border-white/5 rounded-2xl p-6 space-y-3 font-mono-code text-xs">
-          <div class="text-purple-400 font-bold uppercase tracking-wider">// Fee-Only Economic Model & Treasury Routing</div>
-          <p class="text-slate-300 font-sans leading-relaxed">
-            Unlike legacy networks dependent on inflationary block subsidies, Lunul operates on a sustainable fee-only economic model. Validators process transactions for explicit public fees attached to the ZK balance relation. Furthermore, platform contract deployments route a flat 5.0 LUN fee directly to the Lunul Foundation treasury wallet (<code class="text-purple-300 font-mono">0x8632fa855d5Dc6b59A3cF892d72CF4a94F182AAE</code>) to fund ongoing core protocol development.
-          </p>
-        </div>
-      </section>
-
-      <hr class="border-white/10">
-
-      <!-- SECTION 4: TOKENOMICS -->
-      <section id="tokenomics" class="space-y-6">
-        <h2 class="text-xl sm:text-2xl font-extrabold text-white font-mono-code flex items-center space-x-3">
-          <span class="text-purple-400">4.</span>
-          <span>Genesis Tokenomics & Supply Distribution</span>
-        </h2>
-        <p>The native utility and gas token of the ecosystem is <strong class="text-white">LUN</strong>, governed by a hardcoded fixed supply of exactly <strong class="text-white">1,000,000,000 (1 Billion)</strong> tokens.</p>
-        
-        <!-- TABLE -->
-        <div class="overflow-x-auto font-mono-code text-xs">
-          <table class="w-full text-left text-slate-300 border border-white/10 rounded-2xl overflow-hidden">
-            <thead class="bg-black/80 text-slate-400 uppercase text-[10px]">
-              <tr>
-                <th class="p-3">Category</th>
-                <th class="p-3">Percentage</th>
-                <th class="p-3">Amount (LUN)</th>
-                <th class="p-3 rounded-r-xl">Purpose & Vesting Schedule</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-white/5 bg-zinc-950/40">
-              <tr>
-                <td class="p-3 font-bold text-white">Community Rewards</td>
-                <td class="p-3 text-purple-400">10%</td>
-                <td class="p-3">100,000,000</td>
-                <td class="p-3 text-slate-400">Staking rewards, developer grants, and ecosystem airdrops.</td>
-              </tr>
-              <tr>
-                <td class="p-3 font-bold text-white">Ecosystem Incentives</td>
-                <td class="p-3 text-purple-400">10%</td>
-                <td class="p-3">100,000,000</td>
-                <td class="p-3 text-slate-400">Fostering privacy-first dApps and partner protocol integrations.</td>
-              </tr>
-              <tr>
-                <td class="p-3 font-bold text-white">Validator Rewards</td>
-                <td class="p-3 text-purple-400">10%</td>
-                <td class="p-3">100,000,000</td>
-                <td class="p-3 text-slate-400">Linear vesting over 3 years to secure network consensus.</td>
-              </tr>
-              <tr>
-                <td class="p-3 font-bold text-white">Investors (Seed)</td>
-                <td class="p-3 text-purple-400">10%</td>
-                <td class="p-3">100,000,000</td>
-                <td class="p-3 text-slate-400">Issued at $0.05 ($5M raised); 25% at launch, 2-year linear vesting.</td>
-              </tr>
-              <tr>
-                <td class="p-3 font-bold text-white">Team and Advisors</td>
-                <td class="p-3 text-purple-400">10%</td>
-                <td class="p-3">100,000,000</td>
-                <td class="p-3 text-slate-400">Core engineering alignment with 12-month cliff.</td>
-              </tr>
-              <tr>
-                <td class="p-3 font-bold text-white">Marketing & Partnerships</td>
-                <td class="p-3 text-purple-400">10%</td>
-                <td class="p-3">100,000,000</td>
-                <td class="p-3 text-slate-400">Exchange liquidity, global brand visibility, and adoption campaigns.</td>
-              </tr>
-              <tr>
-                <td class="p-3 font-bold text-white">Reserve Fund</td>
-                <td class="p-3 text-purple-400">5%</td>
-                <td class="p-3">50,000,000</td>
-                <td class="p-3 text-slate-400">Emergency capital buffer and strategic treasury allocation.</td>
-              </tr>
-              <tr>
-                <td class="p-3 font-bold text-white">Liquidity & Market Ops</td>
-                <td class="p-3 text-purple-400">35%</td>
-                <td class="p-3">350,000,000</td>
-                <td class="p-3 text-slate-400">DEX liquidity pools and market-making stability.</td>
-              </tr>
-              <tr class="bg-purple-950/20 font-bold">
-                <td class="p-3 text-white">Total Genesis Supply</td>
-                <td class="p-3 text-purple-400">100%</td>
-                <td class="p-3 text-white">1,000,000,000</td>
-                <td class="p-3 text-purple-300">Fully defined genesis allocation.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="bg-black/40 border border-white/5 rounded-2xl p-6 space-y-2">
-          <h4 class="font-bold text-white font-mono-code text-sm">4.2 Deflationary Burn Mechanism</h4>
-          <p class="text-xs text-slate-400">To offset circulation expansion, 10% of all transaction fees and platform wizard charges are permanently burned, while dynamic gas adjustments maintain network accessibility.</p>
-        </div>
-      </section>
-
-      <hr class="border-white/10">
-
-      <!-- SECTION 5: CONCLUSION -->
-      <section id="conclusion" class="space-y-4">
-        <h2 class="text-xl sm:text-2xl font-extrabold text-white font-mono-code flex items-center space-x-3">
-          <span class="text-purple-400">5.</span>
-          <span>Conclusion</span>
-        </h2>
-        <p>
-          Lunul Null Net successfully bridges the divide between high-performance EVM composability and uncompromising corporate privacy. By uniting parallelized EVM execution, Groth16 ZK-SNARKs, Pedersen commitments, and a deflationary fee-only BFT model, Lunul delivers an uncompromised foundation for institutional finance and private decentralized applications.
-        </p>
-      </section>
-
-    </div>
-
-    <!-- FOOTER CTA BANNER -->
-    <div class="relative overflow-hidden rounded-3xl bg-zinc-950/80 backdrop-blur-xl border border-white/10 p-8 text-center space-y-4 font-mono-code">
-      <div class="text-sm font-bold text-white">Ready to Deploy on NullNet L2?</div>
-      <div class="flex flex-wrap justify-center gap-4 pt-2 text-xs">
-        <a href="creator.html" class="bg-purple-600 hover:bg-purple-500 text-white font-bold py-3 px-6 rounded-xl transition shadow-lg shadow-purple-500/20">Launch IDE Workspace 🚀</a>
-        <a href="https://docs.lunul.org" class="bg-zinc-900 hover:bg-zinc-800 text-slate-200 border border-white/10 font-bold py-3 px-6 rounded-xl transition">Explore Documentation</a>
+    <section class="section" style="padding-top:40px"><div class="wrap">
+      <div class="section-head center"><div class="eyebrow">Why use anything else?</div><h2>Your finances deserve <span class="gradient-text">a choice.</span></h2><p>Privacy isn't a luxury reserved for people with something to hide. It's a sensible part of managing money in a connected world.</p></div>
+      <div class="why-grid">
+        <article class="why-card"><div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg></div><h3>Your wallet isn't your public profile.</h3><p>A visible history can reveal more than individual payments. Shielding aims to reduce unnecessary exposure.</p></article>
+        <article class="why-card"><div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 10h1m4 0h1m-6 4h1m4 0h1"/></svg></div><h3>Your business isn't an open book.</h3><p>Payroll, suppliers and treasury movements can reveal commercial patterns competitors don't need to see.</p></article>
+        <article class="why-card"><div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v18M17 7.5c0-1.7-2.2-3-5-3S7 5.8 7 7.5 9.2 10 12 10s5 1.3 5 3-2.2 3.5-5 3.5-5-1.3-5-3"/></svg></div><h3>Your money should work around your life.</h3><p>Digital finance should be useful without asking you to make every transaction part of your public story.</p></article>
+        <article class="why-card"><div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/></svg></div><h3>Privacy and accountability coexist.</h3><p>Protect legitimate financial discretion without presenting privacy as a way to escape the law.</p></article>
       </div>
-    </div>
+    </div></section>
 
+    <section class="section" style="padding-top:25px"><div class="wrap">
+      <div class="surface architecture"><div><div class="eyebrow">Two layers. One purpose.</div><h2>A more private way to use blockchain.</h2><p>Lunul combines blockchain execution with a dedicated zero-knowledge privacy environment intended to support Terminull's services. The aim is straightforward: shield eligible activity from unnecessary public visibility, without making users learn the underlying cryptography.</p><a class="btn btn-secondary" href="https://docs.lunul.org">How NullNet works ↗</a></div>
+      <div class="layer-stack"><div class="layer"><div class="layer-num">01</div><div><h3>Blockchain execution</h3><p>The underlying network provides the execution environment for supported operations.</p></div></div><div class="layer-connector">Works with</div><div class="layer"><div class="layer-num">02</div><div><h3>Dedicated privacy environment</h3><p>A zero-knowledge layer designed specifically to support Terminull services—not an unrestricted public developer playground.</p></div></div><div class="layer-connector">Designed to power</div><div class="layer"><div class="layer-num">03</div><div><h3>Practical financial tools</h3><p>Terminull brings the experience closer to the way people and businesses manage money.</p></div></div></div></div>
+    </div></section>
+
+    <section class="section" id="use-cases"><div class="wrap">
+      <div class="section-head"><div class="eyebrow">Privacy for the real world</div><h2>Built for business.<br><span class="gradient-text">Relevant to everyone.</span></h2><p>Financial discretion matters in different ways depending on who you are and what you're building.</p></div>
+      <div class="audience-grid">
+        <article class="audience"><div class="mini">01 / Business</div><h3>Companies & founders</h3><p>Reduce unnecessary public exposure around commercial payments, treasury activity and business relationships.</p></article>
+        <article class="audience"><div class="mini">02 / Teams</div><h3>Remote workforces</h3><p>Make payroll and contractor payment workflows more discreet, subject to supported capabilities and local requirements.</p></article>
+        <article class="audience"><div class="mini">03 / Independent</div><h3>Freelancers & creators</h3><p>Your income is personal. Your clients are your business. Choose more discretion over your financial footprint.</p></article>
+        <article class="audience"><div class="mini">04 / Digital assets</div><h3>Crypto users</h3><p>Keep the flexibility of digital assets while reducing unnecessary public visibility around supported activity.</p></article>
+        <article class="audience"><div class="mini">05 / Entertainment</div><h3>Gaming & digital platforms</h3><p>Support legitimate commercial privacy while respecting the licensing and compliance rules that apply to each operation.</p></article>
+        <article class="audience"><div class="mini">06 / Everyday</div><h3>People who value discretion</h3><p>You don't need to be a CEO or a crypto expert. If you value financial privacy, the principle applies to you.</p></article>
+      </div>
+    </div></section>
+
+    <section class="section" style="padding-top:15px"><div class="wrap">
+      <div class="section-head center"><div class="eyebrow">Real problems. Practical applications.</div><h2>Where financial privacy <span class="gradient-text">matters.</span></h2><p>Illustrative scenarios showing the problems Lunul is designed to address—not claims of completed customer deployments.</p></div>
+      <div class="case-grid">
+        <article class="surface case"><div class="case-head"><span class="case-number">CASE 01</span><h3>The growing company</h3></div><div class="case-block"><strong>The challenge</strong><p>Supplier and contractor payments on a public blockchain may expose payment amounts, recurring relationships and operational patterns.</p></div><div class="case-block"><strong>The opportunity</strong><p>A privacy-enabled workflow could reduce public exposure while retaining appropriate internal records and controls.</p></div><div class="outcome"><strong>Intended outcome:</strong> Less commercially sensitive information on public display.</div><span class="illustrative">Illustrative use case</span></article>
+        <article class="surface case"><div class="case-head"><span class="case-number">CASE 02</span><h3>The global team</h3></div><div class="case-block"><strong>The challenge</strong><p>A public transaction history may allow observers to infer payroll patterns or individual compensation.</p></div><div class="case-block"><strong>The opportunity</strong><p>Terminull is designed around structured payroll workflows and payment administration, with NullNet as the intended privacy infrastructure.</p></div><div class="outcome"><strong>Intended outcome:</strong> Greater discretion alongside responsible financial administration.</div><span class="illustrative">Illustrative use case</span></article>
+        <article class="surface case"><div class="case-head"><span class="case-number">CASE 03</span><h3>The independent crypto user</h3></div><div class="case-block"><strong>The challenge</strong><p>A wallet linked to a real identity can reveal financial activity that was never intended for public attention.</p></div><div class="case-block"><strong>The opportunity</strong><p>NullNet's shielding approach is designed to reduce unnecessary visibility for supported transactions.</p></div><div class="outcome"><strong>Intended outcome:</strong> More discretion without giving up blockchain-based finance.</div><span class="illustrative">Illustrative use case</span></article>
+        <article class="surface case"><div class="case-head"><span class="case-number">CASE 04</span><h3>The digital entertainment platform</h3></div><div class="case-block"><strong>The challenge</strong><p>Gaming and entertainment businesses manage sensitive payment flows while facing sector-specific legal obligations.</p></div><div class="case-block"><strong>The opportunity</strong><p>A properly configured deployment could support discreet operations alongside appropriate screening, recordkeeping and lawful oversight.</p></div><div class="outcome"><strong>Intended outcome:</strong> Commercial discretion—not an escape from regulation.</div><span class="illustrative">Illustrative use case</span></article>
+      </div>
+    </div></section>
+
+    <section class="section" style="padding-top:25px"><div class="wrap">
+      <div class="principles"><div><div class="eyebrow">Privacy with principles</div><h2>Peace of mind.<br><span class="gradient-text">Without the blind spot.</span></h2><p>Privacy should protect people and businesses from unnecessary exposure. It should never be marketed as a way to evade the law.</p><p>Lunul's position is clear: legitimate financial discretion matters, and accountability matters too. Safeguards and cooperation must reflect applicable law and the actual capabilities of each service.</p></div><div class="principle-points"><div class="principle-point"><div class="check">✓</div><div><strong>Privacy for legitimate use</strong><span>Designed to reduce unnecessary exposure—not to promote criminal activity.</span></div></div><div class="principle-point"><div class="check">✓</div><div><strong>Honest about limitations</strong><span>No promise of universal anonymity or immunity from investigation.</span></div></div><div class="principle-point"><div class="check">✓</div><div><strong>Accountability matters</strong><span>Compliance and disclosure practices should be accurate, proportionate and lawful.</span></div></div></div></div>
+    </div></section>
+
+    <section class="section" id="technology" style="padding-top:25px"><div class="wrap">
+      <div class="section-head"><div class="eyebrow">A little about the technology</div><h2>The infrastructure behind <span class="gradient-text">the experience.</span></h2><p>The detail is here for those who want to go deeper. Everyone else can focus on what privacy makes possible.</p></div>
+      <div class="tech-grid"><article class="tech"><small>01 / Architecture</small><h3>NullNet</h3><p>Blockchain execution combined with a dedicated zero-knowledge privacy environment intended to support Terminull.</p></article><article class="tech"><small>02 / Network</small><h3>L1 + L2 model</h3><p>An underlying execution layer and a dedicated privacy execution environment. See technical documentation for implementation details.</p></article><article class="tech"><small>03 / Cryptography</small><h3>Zero-knowledge</h3><p>Can verify defined conditions without publicly revealing all underlying information. Protection depends on the protocol implemented.</p></article><article class="tech"><small>04 / Ecosystem</small><h3>LUN token</h3><p>The token associated with the NullNet ecosystem. Consult official documentation for confirmed utility and token mechanics.</p></article></div>
+      <p style="text-align:right;margin-top:18px"><a class="btn btn-secondary" href="https://docs.lunul.org">Read the technical documentation ↗</a></p>
+    </div></section>
+
+    <section class="section" id="faq" style="padding-top:25px"><div class="wrap" style="max-width:900px">
+      <div class="section-head center"><div class="eyebrow">Frequently asked questions</div><h2>Clear answers.<br><span class="gradient-text">No unnecessary jargon.</span></h2></div>
+      <div class="faq-list">
+        <details class="faq-item"><summary>What is Lunul?</summary><div class="faq-answer">Lunul is building a financial privacy ecosystem centred on NullNet, its privacy infrastructure, and Terminull, its financial management suite. The goal is to make financial discretion more practical for individuals and businesses using blockchain.</div></details>
+        <details class="faq-item"><summary>What is NullNet?</summary><div class="faq-answer">NullNet is the privacy infrastructure in the Lunul ecosystem. It is designed to combine blockchain execution with a dedicated zero-knowledge privacy environment for supported financial services.</div></details>
+        <details class="faq-item"><summary>What is Terminull?</summary><div class="faq-answer">Terminull is a financial management suite designed around the Lunul ecosystem. Intended applications include account management, business payment workflows, payroll administration, escrow, treasury organisation and approval controls. Availability depends on implementation and release status.</div></details>
+        <details class="faq-item"><summary>Why does financial privacy matter?</summary><div class="faq-answer">Public blockchain activity can reveal balances, transaction histories and financial relationships. Privacy gives legitimate users greater discretion over what becomes publicly visible.</div></details>
+        <details class="faq-item"><summary>Does privacy mean hiding from authorities?</summary><div class="faq-answer">No. Lunul does not position its services as a way to evade law enforcement, sanctions or financial regulation. Any screening, cooperation or disclosure must reflect applicable law and the actual capabilities of the service.</div></details>
+        <details class="faq-item"><summary>Can Lunul guarantee complete anonymity?</summary><div class="faq-answer">No. Privacy depends on the protocol, transaction path, wallet security, external services and other potential sources of information. NullNet aims to reduce unnecessary exposure for supported activity, not to guarantee that every transaction is untraceable in every circumstance.</div></details>
+        <details class="faq-item"><summary>Do users keep control of their wallet keys?</summary><div class="faq-answer">The intended model supports users retaining control of their own wallet keys. Users should confirm custody arrangements and signing requirements for the specific product or deployment they use.</div></details>
+        <details class="faq-item"><summary>Can businesses use Terminull for payroll and treasury?</summary><div class="faq-answer">Terminull is designed with business workflows in mind, including payroll, account organisation, escrow and approval controls. Production use depends on which features have been implemented, tested and enabled.</div></details>
+        <details class="faq-item"><summary>Can third-party developers build directly on the privacy layer?</summary><div class="faq-answer">The dedicated zero-knowledge environment is intended to serve Terminull's services rather than operate as an unrestricted public developer platform. Consult the technical documentation for confirmed developer capabilities.</div></details>
+        <details class="faq-item"><summary>Is Terminull a traditional bank?</summary><div class="faq-answer">Terminull is presented as a blockchain-based financial management suite. It should not be confused with a licensed deposit-taking bank unless the relevant legal entity holds the necessary authorisation. Check service terms, custody arrangements and regulatory status before using any financial service.</div></details>
+      </div>
+    </div></section>
+
+    <section class="section" style="padding-top:15px"><div class="wrap"><div class="final-cta"><div class="eyebrow">The Lunul principle</div><h2>Privacy is normal.<br><span class="gradient-text">Your finances should be, too.</span></h2><p>Your money is part of your life. Keep the freedom of digital finance, with more control over how much of your financial activity is on public display.</p><div class="hero-actions"><a class="btn btn-primary" href="">Explore Terminull ↗</a><a class="btn btn-secondary" href="https://docs.lunul.org">Discover NullNet ↗</a></div></div></div></section>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="border-t border-white/15 py-8 text-center text-xs text-slate-500 font-mono-code">
-    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div>&copy; 2026 Lunul Foundation (LF). NullNet Shielded Architecture. All rights reserved.</div>
-      <div class="flex items-center space-x-6">
-        <a href="https://docs.lunul.org" class="hover:text-white transition">Documentation</a>
-        <a href="whitepaper.html" class="hover:text-white transition">Whitepaper</a>
-        <a href="creator.html" class="hover:text-white transition">IDE Workspace</a>
-      </div>
-    </div>
-  </footer>
-
+  <footer class="footer"><div class="wrap footer-inner"><div><a class="footer-brand" href="https://lunul.org">lunul<span>.</span></a><div class="footer-note">Lunul Foundation · Lunul Labs · NullNet · LUN · Terminull<br>Privacy is normal. Financial discretion is freedom. Accountability matters.</div><div class="footer-note">© 2026 Lunul Foundation. All rights reserved.</div></div><div class="footer-links"><a href="https://portal.lunul.org">Portall</a><a href="https://docs.lunul.org">Documentation</a><a href="https://whitepaper.lunul.org">Whitepaper</a><a href="https://terminull.lunul.org">Terminull</a><a href="mailto:contact@lunul.org">Contact</a></div></div></footer>
   <script>
-    function toggleMobileMenu() {
-      document.getElementById('mobile-menu').classList.toggle('hidden');
-    }
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('navlinks');
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+      menuToggle.textContent = isOpen ? '×' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open navigation');
+      menuToggle.textContent = '☰';
+    }));
   </script>
 </body>
 </html>
