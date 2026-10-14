@@ -64,7 +64,6 @@ header{position:sticky;top:0;z-index:20;background:rgba(9,9,13,.86);backdrop-fil
      <div class="tile"><div class="tile-kicker">02 / Privacy</div><h3>Shielded state concepts</h3><p>Commitments, proofs and nullifiers are described as mechanisms for protecting transaction details.</p></div>
      <div class="tile"><div class="tile-kicker">03 / Economics</div><h3>Fee-based model</h3><p>The proposed model uses transaction fees, treasury routing and a defined genesis token allocation.</p></div>
     </div>
-    <div class="callout"><strong>Specification note</strong><p>This page presents the design and parameters stated in the supplied whitepaper. Performance figures, privacy guarantees, deployments, audits and token allocations should be independently verified before being treated as measured or production-confirmed facts.</p></div>
    </section>
 
    <section class="section" id="introduction">
@@ -107,7 +106,6 @@ header{position:sticky;top:0;z-index:20;background:rgba(9,9,13,.86);backdrop-fil
      <div class="formula">A(x) · B(x) − C(x) = H(x) · T(x)</div>
      <p class="fineprint">This polynomial identity is part of the QAP-style formulation referenced in the supplied document. Actual privacy and correctness depend on circuit design, trusted setup assumptions where applicable, verifier implementation, and how public inputs and state transitions are validated.</p>
     </div>
-    <div class="callout"><strong>Privacy is a system property</strong><p>Encryption of a payload does not by itself hide every metadata field, and a zero-knowledge proof does not automatically make all EVM contract state private. The public/private data boundary should be documented explicitly for each transaction type.</p></div>
    </section>
 
    <section class="section" id="consensus">
@@ -117,7 +115,6 @@ header{position:sticky;top:0;z-index:20;background:rgba(9,9,13,.86);backdrop-fil
      <div class="tile"><div class="tile-kicker">Consensus</div><h3>Clique PoA</h3><p>A permissioned signer model in which block production depends on authorized signers. Validator admission, signer rotation and fault handling should be specified separately.</p></div>
      <div class="tile"><div class="tile-kicker">Execution</div><h3>Paris EVM target</h3><p>The supplied document warns that bytecode using the Shanghai <code>PUSH0</code> opcode may not execute on a Paris-targeted chain.</p></div>
     </div>
-    <div class="callout"><strong>Compiler configuration</strong><p>Set the EVM target explicitly to <code>paris</code> in the chosen build tool, then test the compiled bytecode against the actual network client. Compiler version alone does not guarantee the intended opcode target.</p></div>
     <div id="fees">
      <h3>3.1 · Fee-only economic model & treasury routing</h3>
      <p>The source describes transaction fees as the basis for validator compensation and states that platform contract deployments route a flat <strong>5.0 LUN</strong> fee to a Lunul Foundation treasury address. It also describes a proposed burn of a portion of fees.</p>
@@ -155,7 +152,6 @@ header{position:sticky;top:0;z-index:20;background:rgba(9,9,13,.86);backdrop-fil
      <p>The source states that 10% of transaction fees and platform wizard charges are permanently burned, with dynamic gas adjustments intended to preserve network accessibility.</p>
      <p class="fineprint">For clarity, publish the exact fee categories subject to burning, the destination or burn method, contract addresses, and transaction examples. Confirm that the implementation matches the stated percentage.</p>
     </div>
-    <div class="callout"><strong>Tokenomics publication checklist</strong><p>Before publication, reconcile the allocation table with the current token contract, treasury wallets, vesting contracts, circulating-supply figures and any historical sale terms. Label any planned or proposed allocations accordingly.</p></div>
    </section>
 
    <section class="section" id="conclusion">
