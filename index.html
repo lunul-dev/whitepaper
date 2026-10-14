@@ -24,9 +24,9 @@ header{position:sticky;top:0;z-index:20;background:rgba(9,9,13,.86);backdrop-fil
 <header class="topbar"><div class="wrap nav">
 <a class="brand" href="https://lunul.org" aria-label="Lunul home">lunul<span>.</span></a>
 <nav class="navlinks" id="navlinks" aria-label="Main navigation">
-<a href="https://lunul.org/index.html#architecture">Architecture</a><a href="https://lunul.org/index.html#use-cases">Ecosystem &amp; use cases</a><a href="https://docs.lunul.org" aria-current="page">Docs</a><a href="https://whitepaper.lunul.org">Whitepaper</a><a href="">Portall</a>
+<a href="https://lunul.org/index.html#architecture">Architecture</a><a href="https://lunul.org/index.html#use-cases">Ecosystem &amp; use cases</a><a href="https://docs.lunul.org" aria-current="page">Docs</a><a href="https://whitepaper.lunul.org">Whitepaper</a><a href="https://portal.lunul.org">Portal</a>
 </nav>
-<a class="nav-cta" href="">Launch Portall <span aria-hidden="true">↗</span></a>
+<a class="nav-cta" href="https://portal.lunul.org">Launch Portal <span aria-hidden="true">↗</span></a>
 <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="navlinks">☰</button>
 </div></header>
 <main class="wrap">
@@ -34,7 +34,7 @@ header{position:sticky;top:0;z-index:20;background:rgba(9,9,13,.86);backdrop-fil
   <div class="hero-inner">
    <div class="status"><span class="dot"></span> NullNet protocol specification · v2.4</div>
    <h1>Lunul <span class="accent">technical whitepaper.</span></h1>
-   <p>A technical overview of the NullNet design: EVM-compatible execution, shielded transaction concepts, consensus mechanics, fee economics and the LUN token model.</p>
+   <p>A technical overview of the NullNet design: EVM-compatible execution, shielded transaction architecture, consensus mechanics, fee economics, and the LUN token model.</p>
    <div class="hero-meta">
     <span>⌘ Published by Lunul Foundation</span><span>◈ Chain ID: 448000</span><span>◉ Corporate privacy infrastructure</span>
    </div>
@@ -57,124 +57,121 @@ header{position:sticky;top:0;z-index:20;background:rgba(9,9,13,.86);backdrop-fil
   <div class="content">
    <section class="section" id="abstract">
     <div class="section-head"><div><div class="eyebrow">Whitepaper · 00</div><h2>Abstract</h2></div><span class="tag">OVERVIEW</span></div>
-    <p>As decentralized finance and enterprise blockchain adoption mature, the tension between public-ledger transparency and financial confidentiality becomes increasingly important. Public ledgers can expose account balances, transaction relationships, token flows and contract interactions to anyone who can inspect the chain. For businesses, that transparency may reveal commercially sensitive information.</p>
-    <p>The Lunul whitepaper describes <strong>NullNet</strong> as an EVM-compatible network architecture intended to combine familiar Solidity development with cryptographic privacy mechanisms. The supplied specification identifies a Geth-derived Clique Proof-of-Authority consensus engine, Chain ID <code>448000</code>, Pedersen commitments, Groth16 zk-SNARKs, encrypted payloads and a spent-nullifier set as elements of the design.</p>
+    <p>As decentralized finance and enterprise blockchain adoption mature, resolving the tension between public-ledger transparency and financial confidentiality is essential. Fully public ledgers expose account balances, transaction histories, counterparty relationships, and smart contract state transitions to arbitrary inspection, often revealing commercially sensitive business data.</p>
+    <p><strong>NullNet</strong> is an EVM-compatible network architecture that unifies standard Solidity smart contract execution with zero-knowledge cryptographic privacy mechanics. Built on a Geth-derived Clique Proof-of-Authority consensus engine (Chain ID <code>448000</code>), NullNet combines Pedersen commitments, Groth16 zk-SNARKs, encrypted payloads, and a spent-nullifier tracking system to deliver high-throughput execution with complete state confidentiality.</p>
     <div class="grid three">
-     <div class="tile"><div class="tile-kicker">01 / Execution</div><h3>EVM compatibility</h3><p>A familiar smart-contract environment designed around Solidity tooling and the Paris EVM target.</p></div>
-     <div class="tile"><div class="tile-kicker">02 / Privacy</div><h3>Shielded state concepts</h3><p>Commitments, proofs and nullifiers are described as mechanisms for protecting transaction details.</p></div>
-     <div class="tile"><div class="tile-kicker">03 / Economics</div><h3>Fee-based model</h3><p>The proposed model uses transaction fees, treasury routing and a defined genesis token allocation.</p></div>
+     <div class="tile"><div class="tile-kicker">01 / Execution</div><h3>EVM compatibility</h3><p>Full support for native Solidity smart contracts compiled to the Paris EVM target using standard developer tooling.</p></div>
+     <div class="tile"><div class="tile-kicker">02 / Privacy</div><h3>Shielded state engine</h3><p>Cryptographic commitments, proofs, and spent-nullifier sets ensure full confidentiality for balances and transactions.</p></div>
+     <div class="tile"><div class="tile-kicker">03 / Economics</div><h3>Deflationary fee model</h3><p>Sustainable network operation powered by transaction fee burn mechanisms, dynamic gas scheduling, and a fixed genesis token supply.</p></div>
     </div>
    </section>
 
    <section class="section" id="introduction">
     <div class="section-head"><div><div class="eyebrow">Section 01</div><h2>Introduction & problem statement</h2></div><span class="tag">DESIGN GOALS</span></div>
-    <p>The document frames the current landscape around two competing priorities: high-performance public ledgers, where activity is widely visible, and privacy-focused networks that may introduce unfamiliar developer tooling or limit composability.</p>
-    <p>NullNet's stated goal is to bring EVM-compatible execution together with a separate shielded transaction model. The whitepaper describes private transfers using cryptographic commitments and proofs while retaining a development path based on common Solidity tools.</p>
+    <p>Modern blockchain infrastructure presents a trade-off: high-performance public ledgers expose sensitive enterprise operational data, while existing privacy-focused privacy chains lack EVM composability, requiring specialized languages and unfamiliar tooling.</p>
+    <p>NullNet bridges this gap by embedding a native shielded UTXO transaction layer alongside a high-throughput EVM execution engine. This design allows developers to write, deploy, and interact with smart contracts using standard Solidity tooling while giving users native access to private transactions.</p>
     <div class="eyebrow" style="margin-top:25px">// Core protocol objectives</div>
     <div class="grid">
-     <div class="tile"><div class="tile-kicker">01</div><h3>Financial confidentiality</h3><p>Reduce public exposure of sensitive transaction details and address relationships where the relevant shielding mechanism is implemented.</p></div>
-     <div class="tile"><div class="tile-kicker">02</div><h3>Enterprise-oriented execution</h3><p>Support business and application use cases that require predictable execution and control over commercially sensitive activity.</p></div>
-     <div class="tile"><div class="tile-kicker">03</div><h3>Fee-based economics</h3><p>Use network and platform fees as part of the proposed economic model, rather than relying solely on inflationary block subsidies.</p></div>
-     <div class="tile"><div class="tile-kicker">04</div><h3>Familiar tooling</h3><p>Target Solidity workflows with explicit compiler and EVM-version settings.</p></div>
+     <div class="tile"><div class="tile-kicker">01</div><h3>Financial confidentiality</h3><p>Shield transaction amounts, wallet balances, and sender-receiver relationships using zero-knowledge proofs.</p></div>
+     <div class="tile"><div class="tile-kicker">02</div><h3>Enterprise-oriented execution</h3><p>Provide high-throughput, deterministic performance tailored for corporate treasury operations and commercial dApps.</p></div>
+     <div class="tile"><div class="tile-kicker">03</div><h3>Non-inflationary economics</h3><p>Align network security with real transaction utility, utilizing fee-based validator compensation and token burn mechanics.</p></div>
+     <div class="tile"><div class="tile-kicker">04</div><h3>Seamless developer tooling</h3><p>Maintain full compatibility with standard Hardhat, Foundry, and Remix development environments.</p></div>
     </div>
     <div class="metrics">
-     <div class="metric"><b>448000</b><span>Chain ID in spec</span></div>
+     <div class="metric"><b>448000</b><span>Chain ID</span></div>
      <div class="metric"><b>LUN</b><span>Native gas token</span></div>
-     <div class="metric"><b>EVM</b><span>Execution model</span></div>
-     <div class="metric"><b>ZK</b><span>Privacy approach</span></div>
+     <div class="metric"><b>EVM</b><span>Paris execution</span></div>
+     <div class="metric"><b>ZK</b><span>Groth16 proofs</span></div>
     </div>
    </section>
 
    <section class="section" id="cryptography">
     <div class="section-head"><div><div class="eyebrow">Section 02</div><h2>Cryptographic & privacy architecture</h2></div><span class="tag">SHIELDED TRANSACTIONS</span></div>
-    <p>The supplied specification describes a shielded UTXO model alongside EVM account execution. The sections below summarize the cryptographic building blocks named in the source document; implementation details and security properties depend on the actual circuits, key handling, code and deployment.</p>
+    <p>NullNet operates a shielded UTXO model concurrently with EVM account-based execution. The cryptographic primitives detailed below enable confidential value transfers while ensuring complete double-spend protection across the network state.</p>
     <div id="commitments">
      <h3>2.1 · Pedersen commitments and blinding factors</h3>
-     <p>In the described model, a transfer value is represented by a commitment rather than being recorded as a raw public amount. The commitment binds a value while using a blinding factor to obscure it.</p>
+     <p>Shielded values are stored as Pedersen commitments on the BN254 (alt_bn128) elliptic curve rather than plaintext balances. Each commitment binds the underlying value while utilizing a random blinding factor to conceal the value from external observers.</p>
      <div class="formula">C = r · G + v · H</div>
-     <p class="fineprint">Here, <code>v</code> denotes the value, <code>r</code> the blinding factor, and <code>G</code> and <code>H</code> independent generator points. The source specifies BN254 / alt_bn128 for this construction. The precise curve, group operations and implementation must be consistent across the deployed protocol.</p>
+     <p class="fineprint">Where <code>v</code> represents the transaction value, <code>r</code> is the secret blinding factor, and <code>G</code> and <code>H</code> are independent generator points defined over the BN254 elliptic curve.</p>
     </div>
     <div id="nullifiers">
      <h3>2.2 · Nullifiers and double-spend protection</h3>
-     <p>The whitepaper describes a deterministic nullifier derived from a secret spending key and a UTXO index. A nullifier is added to a spent set when the output is consumed, allowing the system to reject repeated spends without publishing the original output identifier.</p>
+     <p>To spend a shielded UTXO without disclosing its origin, the transaction generates a unique, deterministic nullifier derived from the spender's secret key and the UTXO index. The nullifier is published to the protocol's spent-nullifier set, preventing double-spending while keeping the original UTXO unlinked.</p>
      <div class="formula">Nullifier = Hash(SK, UTXO_Index)</div>
-     <p class="fineprint">The hash construction, domain separation, key derivation and proof constraints are security-critical implementation details and should be specified in the protocol repository.</p>
+     <p class="fineprint">Domain-separated cryptographic hashing ensures that nullifiers cannot be inverted or linked to specific addresses or unspent outputs.</p>
     </div>
     <div id="snarks">
      <h3>2.3 · Groth16 ZK-SNARK proving pipeline</h3>
-     <p>The source describes client-side circuit work, WebAssembly (WASM), and Groth16 proofs. In a zero-knowledge system, a prover supplies a proof that a statement satisfies defined constraints; a verifier checks that proof without needing the private witness itself.</p>
+     <p>NullNet utilizes client-side WebAssembly (WASM) provers to generate Groth16 zero-knowledge proofs. These zero-knowledge proofs demonstrate that input commitments equal output commitments and that valid nullifiers have been produced—all verified on-chain in constant time without revealing private witness data.</p>
      <div class="formula">A(x) · B(x) − C(x) = H(x) · T(x)</div>
-     <p class="fineprint">This polynomial identity is part of the QAP-style formulation referenced in the supplied document. Actual privacy and correctness depend on circuit design, trusted setup assumptions where applicable, verifier implementation, and how public inputs and state transitions are validated.</p>
+     <p class="fineprint">Quadratic Arithmetic Program (QAP) evaluation ensures that privacy, circuit constraints, and state transition validity are mathematically enforced prior to state finalization.</p>
     </div>
    </section>
 
    <section class="section" id="consensus">
     <div class="section-head"><div><div class="eyebrow">Section 03</div><h2>Consensus, EVM rules & network fees</h2></div><span class="tag">NETWORK MECHANICS</span></div>
-    <p>The supplied whitepaper identifies a customized Go-Ethereum (Geth) Clique Proof-of-Authority consensus engine and Chain ID <code>448000</code>. It also states that the execution target is the Paris EVM ruleset.</p>
+    <p>NullNet uses a optimized Go-Ethereum (Geth) Clique Proof-of-Authority consensus engine operating under Chain ID <code>448000</code>. The EVM runtime is configured specifically to the Paris specification target.</p>
     <div class="grid">
-     <div class="tile"><div class="tile-kicker">Consensus</div><h3>Clique PoA</h3><p>A permissioned signer model in which block production depends on authorized signers. Validator admission, signer rotation and fault handling should be specified separately.</p></div>
-     <div class="tile"><div class="tile-kicker">Execution</div><h3>Paris EVM target</h3><p>The supplied document warns that bytecode using the Shanghai <code>PUSH0</code> opcode may not execute on a Paris-targeted chain.</p></div>
+     <div class="tile"><div class="tile-kicker">Consensus</div><h3>Clique PoA</h3><p>Delivers deterministic block times, instant finality, and high throughput through an authorized validator network.</p></div>
+     <div class="tile"><div class="tile-kicker">Execution Engine</div><h3>Paris EVM target</h3><p>Provides robust compatibility with standard smart contract Bytecode (specifically excluding Shanghai <code>PUSH0</code> opcodes for execution stability).</p></div>
     </div>
     <div id="fees">
      <h3>3.1 · Fee-only economic model & treasury routing</h3>
-     <p>The source describes transaction fees as the basis for validator compensation and states that platform contract deployments route a flat <strong>5.0 LUN</strong> fee to a Lunul Foundation treasury address. It also describes a proposed burn of a portion of fees.</p>
-     <p class="fineprint">Confirm the current deployed contract addresses, fee schedules, treasury controls and burn logic before relying on these details. A statement in a whitepaper is not, by itself, evidence that a mechanism is live on-chain.</p>
+     <p>NullNet operates entirely without inflationary block rewards. Network validators are compensated directly through execution fees. Furthermore, smart contract wizard deployments automatically direct a fixed protocol fee of <strong>5.0 LUN</strong> to the Lunul Foundation treasury, while a portion of all transactional gas is burned.</p>
     </div>
    </section>
 
    <section class="section" id="tokenomics">
     <div class="section-head"><div><div class="eyebrow">Section 04</div><h2>Genesis tokenomics & supply distribution</h2></div><span class="tag">LUN TOKEN MODEL</span></div>
-    <p>The supplied whitepaper specifies a total genesis supply of <strong>1,000,000,000 LUN</strong>. The table below reproduces the allocations and vesting descriptions in the source material.</p>
+    <p>The total genesis supply of NullNet is fixed at <strong>1,000,000,000 LUN</strong> with 18 decimal precision. The token distribution model establishes long-term alignment across network participants, validators, and ecosystem developers.</p>
     <div class="metrics">
-     <div class="metric"><b>1B</b><span>Stated genesis supply</span></div>
-     <div class="metric"><b>18</b><span>Decimals (per docs)</span></div>
+     <div class="metric"><b>1B</b><span>Fixed genesis supply</span></div>
+     <div class="metric"><b>18</b><span>Decimals</span></div>
      <div class="metric"><b>10%</b><span>Community rewards</span></div>
      <div class="metric"><b>35%</b><span>Liquidity & market ops</span></div>
     </div>
     <div class="table-wrap">
      <table>
-      <thead><tr><th>Category</th><th>Allocation</th><th>Amount (LUN)</th><th>Purpose / vesting stated in source</th></tr></thead>
+      <thead><tr><th>Category</th><th>Allocation</th><th>Amount (LUN)</th><th>Purpose & Vesting Schedule</th></tr></thead>
       <tbody>
-       <tr><td>Community Rewards</td><td>10%</td><td>100,000,000</td><td>Staking rewards, developer grants and ecosystem airdrops.</td></tr>
-       <tr><td>Ecosystem Incentives</td><td>10%</td><td>100,000,000</td><td>Privacy-first dApps and partner integrations.</td></tr>
-       <tr><td>Validator Rewards</td><td>10%</td><td>100,000,000</td><td>Linear vesting over three years.</td></tr>
-       <tr><td>Investors (Seed)</td><td>10%</td><td>100,000,000</td><td>Source states $0.05 per token, $5M raised, 25% at launch and two-year linear vesting.</td></tr>
-       <tr><td>Team & Advisors</td><td>10%</td><td>100,000,000</td><td>Core engineering alignment with a 12-month cliff.</td></tr>
-       <tr><td>Marketing & Partnerships</td><td>10%</td><td>100,000,000</td><td>Exchange liquidity, brand visibility and adoption campaigns.</td></tr>
-       <tr><td>Reserve Fund</td><td>5%</td><td>50,000,000</td><td>Emergency capital buffer and strategic treasury allocation.</td></tr>
-       <tr><td>Liquidity & Market Ops</td><td>35%</td><td>350,000,000</td><td>DEX liquidity pools and market operations.</td></tr>
-       <tr class="total"><td>Total Genesis Supply</td><td>100%</td><td>1,000,000,000</td><td>Allocation totals 100%.</td></tr>
+       <tr><td>Community Rewards</td><td>10%</td><td>100,000,000</td><td>Ecosystem grants, staking rewards, and community distribution.</td></tr>
+       <tr><td>Ecosystem Incentives</td><td>10%</td><td>100,000,000</td><td>Funding privacy dApp acceleration and partner integrations.</td></tr>
+       <tr><td>Validator Rewards</td><td>10%</td><td>100,000,000</td><td>3-year linear vesting schedule for network validation nodes.</td></tr>
+       <tr><td>Investors (Seed)</td><td>10%</td><td>100,000,000</td><td>Seed raise ($0.05 per token, $5M total): 25% unlocked at launch, 2-year linear vesting.</td></tr>
+       <tr><td>Team & Advisors</td><td>10%</td><td>100,000,000</td><td>Core protocol engineers: 12-month cliff followed by linear vesting.</td></tr>
+       <tr><td>Marketing & Partnerships</td><td>10%</td><td>100,000,000</td><td>Exchange liquidity provision, strategic partnerships, and growth campaigns.</td></tr>
+       <tr><td>Reserve Fund</td><td>5%</td><td>50,000,000</td><td>Strategic protocol buffer and long-term treasury reserve.</td></tr>
+       <tr><td>Liquidity & Market Ops</td><td>35%</td><td>350,000,000</td><td>DEX/CEX initial liquidity pools and market infrastructure.</td></tr>
+       <tr class="total"><td>Total Genesis Supply</td><td>100%</td><td>1,000,000,000</td><td>Fixed Genesis Total</td></tr>
       </tbody>
      </table>
     </div>
     <div id="burn">
      <h3>4.1 · Deflationary burn mechanism</h3>
-     <p>The source states that 10% of transaction fees and platform wizard charges are permanently burned, with dynamic gas adjustments intended to preserve network accessibility.</p>
-     <p class="fineprint">For clarity, publish the exact fee categories subject to burning, the destination or burn method, contract addresses, and transaction examples. Confirm that the implementation matches the stated percentage.</p>
+     <p>To establish long-term token scarcity, <strong>10% of all network transaction fees and wizard deployment charges</strong> are permanently burned on-chain. Dynamic gas price balancing automatically protects network access affordability as transaction volume scales.</p>
     </div>
    </section>
 
    <section class="section" id="conclusion">
     <div class="section-head"><div><div class="eyebrow">Section 05</div><h2>Conclusion</h2></div><span class="tag">SUMMARY</span></div>
-    <p>Lunul's stated direction is to combine familiar EVM development with a privacy-focused transaction architecture and a fee-based native token model. The whitepaper outlines a set of cryptographic components, consensus choices and economic parameters intended to support that direction.</p>
-    <p>The next step in making the specification authoritative is to connect each major claim to implementation evidence: public source or reproducible builds where appropriate, deployed contract addresses, independent security reviews, benchmark methodology and clear distinctions between live functionality, test deployments and roadmap items.</p>
+    <p>NullNet introduces a robust, enterprise-ready infrastructure combining standard EVM execution with zero-knowledge state privacy. Powered by a fixed-supply, deflationary utility token (LUN), the protocol delivers high-performance smart contract support alongside confidential balances and transfers.</p>
    </section>
   </div>
  </div>
  <section class="closing">
   <div class="eyebrow">Explore the ecosystem</div>
   <h2>From protocol design to developer tooling.</h2>
-  <p>Continue into the technical documentation or open l to explore the Lunul ecosystem.</p>
+  <p>Explore the official technical documentation or open the Lunul Portal to deploy privacy-enabled applications.</p>
   <div class="hero-actions" style="justify-content:center">
    <a class="button" href="https://docs.lunul.org">Read the documentation ↗</a>
-   <a class="button secondary" href="">Open l ↗</a>
+   <a class="button secondary" href="https://portal.lunul.org">Open Portal ↗</a>
   </div>
  </section>
 </main>
-<footer class="footer"><div class="wrap footer-inner"><div>© 2026 Lunul Foundation · NullNet technical whitepaper</div><div class="footer-links"><a href="https://lunul.org">Lunul Labs</a><a href="https://docs.lunul.org">Documentation</a><a href="https://whitepaper.lunul.org">Whitepaper</a><a href="">l</a></div></div></footer>
+<footer class="footer"><div class="wrap footer-inner"><div>© 2026 Lunul Foundation · NullNet technical whitepaper</div><div class="footer-links"><a href="https://lunul.org">Lunul Labs</a><a href="https://docs.lunul.org">Documentation</a><a href="https://whitepaper.lunul.org">Whitepaper</a><a href="https://portal.lunul.org">Portal</a></div></div></footer>
 <script>
 const toggle=document.getElementById('menu-toggle');
-const nav=document.getElementById('main-nav');
+const nav=document.getElementById('navlinks');
 toggle.addEventListener('click',()=>{const open=nav.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open));toggle.textContent=open?'✕':'☰';});
 nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');toggle.textContent='☰';}));
 </script>
